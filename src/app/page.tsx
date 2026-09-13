@@ -4,10 +4,31 @@ import { useState } from "react";
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
-  const handleAnalyze = () => {
-    console.log("Analyzing:", jobDescription);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState ("");
+  const handleAnalyze = async () => {
+
+    setLoading(true);
+    try{
+      // send the job description to back-end 
+      const response = await fetch("/api/tailor", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({jobDescription}),
+      })
+
+    // parse the response body from JSON text
+      const data = await response.json();
+      setResult(data.result);
+    } catch(error) {
+      // log for debugging
+      console.error("Error analyzing: ", error);
+      setResult("ERROR. Please try again")
+
+    } finally {
+      setLoading(false);
+    }
   }
-  const [result, setResult] = useState("");
 
   return (
     <div className="page-container">
@@ -16,12 +37,12 @@ export default function Home() {
 
       <textarea
         className="job-textarea"
-        placeholder="Senior Frontend Engineer — React, TypeScript, GraphQL. 5+ years experience..."
+        placeholder=""
         value={jobDescription}
         onChange={(e) => setJobDescription(e.target.value)}
         rows={10}
       />
-      <button className="analyze-button" onClick={handleAnalyze} disabled={!jobDescription.trim()}>Analyze</button>
+      <button className="analyze-button" onClick={handleAnalyze} disabled={!jobDescription.trim() || loading}> {loading ? "Analyzing" : "Analyze"}</button>
       {result && (
           <div className="results-box">
             <h2 className="results-heading">Key Requirements</h2>
