@@ -36,7 +36,7 @@ export default function Home() {
   }
 
   return (
-    <><Link href="/history" className="history-link">View history</Link><div className="page-container">
+    <div className="page-container">
       <h1 className="page-heading">Resume Tailor</h1>
       <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
       <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
@@ -48,6 +48,7 @@ export default function Home() {
         onChange={(e) => setJobDescription(e.target.value)}
         rows={10} />
       <button className="analyze-button" onClick={handleAnalyze} disabled={!jobDescription.trim() || loading}> {loading ? "Analyzing" : "Analyze"}</button>
+      <Link href="/history" className="history-link">View history</Link>
       {result && (
         <div className="results-box">
           <h2 className="results-heading">Key Requirements</h2>
@@ -56,6 +57,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </div></>
+    </div>
   );
 }

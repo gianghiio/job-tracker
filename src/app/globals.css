@@ -96,3 +96,45 @@ body {
   outline: none;
   box-shadow: 0 0 0 2px #E8B400;
 }
+
+/* HISTORY PAGE */
+
+.history-link {
+  display: inline-block;
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  color: #3D5A6C;
+  text-decoration: none;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  max-width: 640px;
+  width: 100%;
+}
+
+.history-link:hover {
+  text-decoration: underline;
+}
+.history-item {
+  border: 1px solid #D8DBD6;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #FFFFFF;
+}
+
+.history-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.history-company {
+  color: #3D5A6C;
+  margin: 0.25rem 0;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: #9A9C97;
+  margin: 0;
+}
