@@ -114,6 +114,7 @@ body {
 .history-link:hover {
   text-decoration: underline;
 }
+
 .history-item {
   border: 1px solid #D8DBD6;
   border-radius: 4px;
@@ -137,4 +138,26 @@ body {
   font-size: 0.75rem;
   color: #9A9C97;
   margin: 0;
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  background: none;
+  border: 1px solid #D8DBD6;
+  border-radius: 4px;
+  padding: 0.35rem 0.75rem;
+  color: #A32D2D;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #FCEBEB;
+  border-color: #A32D2D;
 }

@@ -29,6 +29,22 @@ export default function History() {
         fetchApplications();
     },[]);
 
+    // Delete specific application
+    const handleDelete = async (id: number, e: React.MouseEvent) => {
+        e.stopPropagation;
+        try {
+            await fetch("/api/applications",{
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({id}),
+            });
+            //remove it from local state so the UI updates immediately
+            setApplications((prev) => prev.filter((app) => app.id !== id));
+        } catch (error) {
+            console.error("Error deleting application", error);
+        }
+    }
+
     return (
         <div className="page-container">
             <h1 className="page-loading">History</h1>
@@ -41,7 +57,10 @@ export default function History() {
 
             {applications.map((app) => (
                 <div key={app.id} className="history-item">
-                    <h2 className="history-title">{app.jobTitle}</h2>
+                    <div className="history-item-header">
+                        <h2 className="history-title">{app.jobTitle}</h2>
+                        <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
+                    </div>
                     <p className="history-company">{app.companyName}</p>
                     <p className="history-date">{new Date(app.createdAt).toLocaleDateString()}</p>
                 </div>

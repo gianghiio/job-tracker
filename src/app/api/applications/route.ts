@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
@@ -13,6 +13,24 @@ export async function GET() {
         console.error("Error loading applications", error);
         return NextResponse.json(
             {error: "Failed to fetch applications"},
+            {status: 500}
+        )
+    }
+}
+
+export async function DELETE(req: NextRequest) {
+    try {
+        const {id} = await req.json();
+        await prisma.jobApplication.delete({
+            where: {id},
+        })
+
+        return NextResponse.json({success: true});
+
+    } catch (error) {
+        console.error("Error deleting application", error);
+        return NextResponse.json(
+            {error: "Failed to delete application"},
             {status: 500}
         )
     }
