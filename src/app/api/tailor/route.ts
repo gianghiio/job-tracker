@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
     try {
@@ -37,6 +38,15 @@ export async function POST(req: NextRequest) {
         const data = await response.json();
         // pull out the reply text
         const extractedText = data.content?.[0]?.text ?? "No response text found";
+
+        // save this analysis to the database
+        await prisma.jobApplication.create({
+            data: {
+                companyName: "Unknown",
+                jobTitle: "Unknown",
+                jobDescription: jobDescription,
+            },
+        });
 
         // send result back to frontend
         return NextResponse.json({ result: extractedText });
