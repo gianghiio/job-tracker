@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 export async function POST(req: NextRequest) {
     try {
         // get the job description sent from front-end
-        const { jobDescription } = await req.json();
+        const { companyName, jobTitle, jobDescription } = await req.json();
 
         // check whether the job description is empty
         if (!jobDescription || jobDescription.trim().length === 0) {
@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
         // save this analysis to the database
         await prisma.jobApplication.create({
             data: {
-                companyName: "Unknown",
-                jobTitle: "Unknown",
+                companyName: companyName || "Unknown",
+                jobTitle: jobTitle || "Unknown",
                 jobDescription: jobDescription,
             },
         });

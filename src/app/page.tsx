@@ -8,6 +8,8 @@ export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState ("");
+  const [companyName, setCompanyName] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
   const handleAnalyze = async () => {
 
     setLoading(true);
@@ -16,7 +18,7 @@ export default function Home() {
       const response = await fetch("/api/tailor", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({jobDescription}),
+        body: JSON.stringify({companyName, jobTitle,jobDescription}),
       })
 
     // parse the response body from JSON text
@@ -36,7 +38,8 @@ export default function Home() {
     <div className="page-container">
       <h1 className="page-heading">Resume Tailor</h1>
       <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
-
+      <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e)=> setCompanyName(e.target.value)}/>
+      <input type="text" className= "text-input" placeholder="Job Title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
       <textarea
         className="job-textarea"
         placeholder=""
