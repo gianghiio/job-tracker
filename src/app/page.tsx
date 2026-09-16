@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
@@ -46,7 +48,9 @@ export default function Home() {
       {result && (
           <div className="results-box">
             <h2 className="results-heading">Key Requirements</h2>
-            <pre className="results-text">{result}</pre>
+            <div className="results-text">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{result}</ReactMarkdown>
+            </div>
           </div>
       )}
     </div>

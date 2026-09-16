@@ -9,12 +9,14 @@ body {
 
 .page-container {
   min-height: 100vh;
+  width: 100%;
   background-color: #F5F6F4;
   color: #14181B;
   font-family: var(--font-inter);
   padding: 4rem 1.5rem;
   max-width: 640px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .page-heading {
@@ -58,4 +60,23 @@ body {
 
 .analyze-button:hover {
   background-color: #FF9100;
+}
+
+.results-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.8rem;
+}
+
+.results-text th,
+.results-text td {
+  border: 1px solid #D8DBD6;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.results-text thead th {
+  background-color: #FFFFFF;
+  font-weight: 700;
 }
