@@ -13,6 +13,7 @@ type Application = {
 export default function History() {
     const [applications, setApplications] = useState<Application[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedApp, setSelectedApp] = useState<Application | null>(null);
     // run once right when the page loads
     useEffect(() => {
         const fetchApplications = async() => {
@@ -56,7 +57,7 @@ export default function History() {
             )}
 
             {applications.map((app) => (
-                <div key={app.id} className="history-item">
+                <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                     <div className="history-item-header">
                         <h2 className="history-title">{app.jobTitle}</h2>
                         <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
@@ -65,6 +66,18 @@ export default function History() {
                     <p className="history-date">{new Date(app.createdAt).toLocaleDateString()}</p>
                 </div>
             ))}
+
+            {selectedApp && (
+                <div className="modal-overlay" onClick={() => setSelectedApp(null)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-close" onClick={() => setSelectedApp(null)}>×</button>
+                        <h2 className="history-title">{selectedApp.jobTitle}</h2>
+                        <p className="history-company">{selectedApp.companyName}</p>
+                        <h3 className="history-subheading">Job Description</h3>
+                        <p className="history-job-description">{selectedApp.jobDescription}</p>
+                    </div>
+                </div>
+            )}
         </div>
     )
 
