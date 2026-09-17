@@ -14,6 +14,7 @@ export default function History() {
     const [applications, setApplications] = useState<Application[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+    const [searchTerm, setSearchTerm] = useState("");
     // run once right when the page loads
     useEffect(() => {
         const fetchApplications = async() => {
@@ -52,17 +53,33 @@ export default function History() {
         }
     }
 
+    // Search for specific job application
+    const filteredApplication = applications.filter((app) => {
+        try {
+            const term = searchTerm.toLowerCase();
+            return (
+                app.companyName.toLowerCase().includes(term) ||
+                app.jobTitle.toLowerCase().includes(term)
+            )
+        } catch (error){
+            console.error("Error searching for application", error)
+        }
+    }) 
+
     return (
         <div className="page-container">
             <h1 className="page-loading">History</h1>
             <p className="page-subtitle">Your analyzed job applications</p>
 
+            <div className="search-function">
+                <input className="search-area" placeholder="Search for Company Name or Job Title" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+            </div>
             {loading && <p>Loading...</p>}
             {!loading && applications.length === 0 && (
                 <p>No applications found</p>
             )}
 
-            {applications.map((app) => (
+            {filteredApplication.map((app) => (
                 <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                     <div className="history-item-header">
                         <h2 className="history-title">{app.jobTitle}</h2>
