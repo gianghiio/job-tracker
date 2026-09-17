@@ -11,8 +11,14 @@ export default function Home() {
   const [result, setResult] = useState ("");
   const [companyName, setCompanyName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const handleAnalyze = async () => {
 
+    if (!companyName || !jobTitle) {
+      setErrorMessage("Please fill in Company Name and Job Title");
+      return;
+    }
+    setErrorMessage("");
     setLoading(true);
     try{
       // send the job description to back-end 
@@ -47,7 +53,10 @@ export default function Home() {
         value={jobDescription}
         onChange={(e) => setJobDescription(e.target.value)}
         rows={10} />
-      <button className="analyze-button" onClick={handleAnalyze} disabled={!jobDescription.trim() || loading}> {loading ? "Analyzing" : "Analyze"}</button>
+      {errorMessage && 
+        <p className="error-text">{errorMessage}</p>  
+      }
+      <button className="analyze-button" onClick={handleAnalyze} disabled={loading}> {loading ? "Analyzing" : "Analyze"}</button>
       <Link href="/history" className="history-link">View history</Link>
       {result && (
         <div className="results-box">

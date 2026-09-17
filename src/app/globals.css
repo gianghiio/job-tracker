@@ -234,3 +234,10 @@ body {
   color:#14181B;
   margin-bottom: 1rem;
 }
+
+.error-text{
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  color:#A32D2D;
+  margin-bottom: 1rem;
+}
