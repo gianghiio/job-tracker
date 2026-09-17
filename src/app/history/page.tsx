@@ -32,13 +32,19 @@ export default function History() {
 
     // Delete specific application
     const handleDelete = async (id: number, e: React.MouseEvent) => {
-        e.stopPropagation;
+        e.stopPropagation();
+        // Confirm deletion
+        const isConfirmed = confirm("Are you sure you want to delete this?");
+        if (!isConfirmed) {
+            return;
+        }
         try {
             await fetch("/api/applications",{
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({id}),
             });
+
             //remove it from local state so the UI updates immediately
             setApplications((prev) => prev.filter((app) => app.id !== id));
         } catch (error) {
