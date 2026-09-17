@@ -241,3 +241,15 @@ body {
   color:#A32D2D;
   margin-bottom: 1rem;
 }
+
+.home-page {
+  display: inline-block;
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  color: #3D5A6C;
+  text-decoration: none;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  max-width: 640px;
+  width: 100%;
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type Application = {
     id: number;
@@ -68,6 +69,7 @@ export default function History() {
 
     return (
         <div className="page-container">
+            <Link href="/" className="home-page">Back to job analysis</Link>
             <h1 className="page-loading">History</h1>
             <p className="page-subtitle">Your analyzed job applications</p>
 
