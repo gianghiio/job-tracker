@@ -78,6 +78,11 @@ export default function History() {
             {!loading && applications.length === 0 && (
                 <p>No applications found</p>
             )}
+            {!loading && (
+                <p className="results-count">
+                    Showing {filteredApplication.length} of {applications.length}
+                </p>
+            )}
 
             {filteredApplication.map((app) => (
                 <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
