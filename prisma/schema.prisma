@@ -19,3 +19,9 @@ model JobApplication {
   jobDescription String
   createdAt   DateTime @default(now())
 }
+
+model Resume {
+  id Int @id @default(autoincrement())
+  content String
+  uploadedAt DateTime @default(now())
+}
