@@ -69,7 +69,11 @@ export default function History() {
 
     return (
         <div className="page-container">
-            <Link href="/" className="home-page">Back to job analysis</Link>
+            <div className="nav-tag">
+                <Link href="/resume" className="resume-link">Your Resume</Link>
+                <Link href="/" className="job-link">Job Description</Link>
+                <Link href="/history" className="history-link">View history</Link>
+            </div>
             <h1 className="page-loading">History</h1>
             <p className="page-subtitle">Your analyzed job applications</p>
 

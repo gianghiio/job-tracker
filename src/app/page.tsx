@@ -43,6 +43,11 @@ export default function Home() {
 
   return (
     <div className="page-container">
+      <div className="nav-tag">
+        <Link href="/resume" className="resume-link">Your Resume</Link>
+        <Link href="/" className="job-link">Job Description</Link>
+        <Link href="/history" className="history-link">View history</Link>
+      </div>
       <h1 className="page-heading">Resume Tailor</h1>
       <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
       <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
@@ -57,7 +62,6 @@ export default function Home() {
         <p className="error-text">{errorMessage}</p>  
       }
       <button className="analyze-button" onClick={handleAnalyze} disabled={loading}> {loading ? "Analyzing" : "Analyze"}</button>
-      <Link href="/history" className="history-link">View history</Link>
       {result && (
         <div className="results-box">
           <h2 className="results-heading">Key Requirements</h2>
