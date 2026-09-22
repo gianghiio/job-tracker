@@ -29,7 +29,7 @@ export default function Home() {
       })
 
     // parse the response body from JSON text
-      const data = await response.json();
+    const data = await response.json();
       setResult(data.result);
     } catch(error) {
       // log for debugging

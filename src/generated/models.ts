@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/JobApplication'
+export type * from './models/Resume'
 export type * from './commonInputTypes'
