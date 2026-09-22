@@ -17,6 +17,7 @@ model JobApplication {
   companyName String
   jobTitle    String
   jobDescription String
+  result String?
   createdAt   DateTime @default(now())
 }
 

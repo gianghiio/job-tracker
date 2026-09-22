@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
         // extract plain text from the PDF
         const data = await pdf(buffer);
         const extractedText = data.text;
+        console.log(extractedText);
 
         // check if a resume already exists, update it instead of creating a duplicate
         const existingResume = await prisma.resume.findFirst();

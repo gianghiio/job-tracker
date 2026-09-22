@@ -11,6 +11,18 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Job Description is required" }, { status: 400 });
         }
 
+        // fetch the saved resume
+        const resume = await prisma.resume.findFirst();
+        
+        // build the prompt differently given on existed resume
+        let promptContent : string;
+
+        if (resume) {
+            promptContent = `Here is a job description:\n${jobDescription}\n\nHere is my resume:\n${resume.content}\n\nFirst, extract the key requirements, skills, and qualifications from the job description as a flat bullet-point list. Then, separately, identify which points from my resume are most relevant to this specific job, and briefly suggest how to phrase or emphasize them to better match this posting. Format your response with two clear sections: "Key Requirements" and "Relevant Resume Points".`;
+        } else {
+            promptContent = `Extract the key requirements, skills, and qualifications from the following job description. Return ONLY a flat bullet-point list using "-" for each item, no headers, no categories, no bold text, no extra commentary.\n\nJob description:\n${jobDescription}`;
+        }
+        
         // fetch Claude API
         const response = await fetch("https://api.anthropic.com/v1/messages", {
             method: "POST",
@@ -24,7 +36,7 @@ export async function POST(req: NextRequest) {
                 max_tokens: 1000,
                 messages: [{
                     role: "user",
-                    content: `Extract key requirements from:\n${jobDescription}`,
+                    content: promptContent,
                 }],
             }),
         });
@@ -45,6 +57,7 @@ export async function POST(req: NextRequest) {
                 companyName: companyName || "Unknown",
                 jobTitle: jobTitle || "Unknown",
                 jobDescription: jobDescription,
+                result: extractedText,
             },
         });
 

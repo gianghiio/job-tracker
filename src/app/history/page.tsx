@@ -9,6 +9,7 @@ type Application = {
     createdAt: string;
     jobTitle: string;
     jobDescription: string;
+    result: string | null; 
 }
 
 export default function History() {
