@@ -43,7 +43,20 @@ export default function Home() {
 
   return (
     <div className="page-container">
-      <h1 className="page-heading">Resume Tailor</h1>
+      <div className="header">
+        <div className="brand-name">
+          <h1>Resume Tailor</h1>
+        </div>
+        <div className="nav-tag">
+            <Link href="/resume" className="resume-link">Your Resume</Link>
+            <Link href="/tailor" className="job-link">Job Description</Link>
+            <Link href="/history" className="history-link">View history</Link>
+        </div>  
+        <div className="auth">
+          <button className="log-in">Log In</button>
+          <button className="sign-up">Sign Up</button>
+        </div>
+      </div>
       <p className="page-subtitle">Landing page coming soon</p>
     </div>
   );
