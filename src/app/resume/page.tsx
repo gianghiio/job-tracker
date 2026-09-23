@@ -30,12 +30,21 @@ export default function Resume() {
     }
     return (
         <div className="page-container">
-            <div className="nav-tag">
-                <Link href="/resume" className="resume-link">Your Resume</Link>
-                <Link href="/tailor" className="job-link">Job Description</Link>
-                <Link href="/history" className="history-link">View history</Link>
-            </div>   
-            <h1 className="page-heading">Resume Tailor</h1>
+            <div className="header">
+                <div className="brand-name">
+                <h1>Resume Tailor</h1>
+                </div>
+                <div className="nav-tag">
+                    <Link href="/resume" className="resume-link">Your Resume</Link>
+                    <Link href="/tailor" className="job-link">Job Description</Link>
+                    <Link href="/history" className="history-link">View history</Link>
+                </div>  
+                <div className="auth">
+                    <button className="log-in">Log In</button>
+                    <button className="sign-up">Sign Up</button>
+                </div>
+            </div> 
+            <h1 className="page-heading">Resume</h1>
             <p className="page-subtitle">Upload your resume as the PDF file</p>
             <input type="file" accept=".pdf" ref={resumeInput} onChange={onChange} style={{display: "none"}}/>
             <button className='upload-btn' onClick={() => resumeInput.current?.click()}>Choose File</button>
