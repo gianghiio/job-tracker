@@ -64,7 +64,7 @@ export default function Home() {
           <button className="cta-button">Get Started</button>
         </div>
         <div className="hero-right">
-          <p>Example</p>
+          <img src="/demo.png" alt="Example of resume matching results" className="preview-image" />
         </div>
       </div>
     </div>

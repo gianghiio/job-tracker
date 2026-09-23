@@ -151,6 +151,13 @@ body {
   }
 }
 
+.preview-image {
+  width: 100%;
+  border: 1px solid #D8DBD6;
+  border-radius: 8px;
+  display: block;
+}
+
 /**/
 
 
