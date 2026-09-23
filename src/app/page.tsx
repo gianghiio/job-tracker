@@ -43,33 +43,8 @@ export default function Home() {
 
   return (
     <div className="page-container">
-      <div className="nav-tag">
-        <Link href="/resume" className="resume-link">Your Resume</Link>
-        <Link href="/" className="job-link">Job Description</Link>
-        <Link href="/history" className="history-link">View history</Link>
-      </div>
       <h1 className="page-heading">Resume Tailor</h1>
-      <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
-      <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
-      <input type="text" className="text-input" placeholder="Job Title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
-      <textarea
-        className="job-textarea"
-        placeholder=""
-        value={jobDescription}
-        onChange={(e) => setJobDescription(e.target.value)}
-        rows={10} />
-      {errorMessage && 
-        <p className="error-text">{errorMessage}</p>  
-      }
-      <button className="analyze-button" onClick={handleAnalyze} disabled={loading}> {loading ? "Analyzing" : "Analyze"}</button>
-      {result && (
-        <div className="results-box">
-          <h2 className="results-heading">Key Requirements</h2>
-          <div className="results-text">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{result}</ReactMarkdown>
-          </div>
-        </div>
-      )}
+      <p className="page-subtitle">Landing page coming soon</p>
     </div>
   );
 }
