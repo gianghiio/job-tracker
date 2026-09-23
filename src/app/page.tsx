@@ -57,7 +57,16 @@ export default function Home() {
           <button className="sign-up">Sign Up</button>
         </div>
       </div>
-      <p className="page-subtitle">Landing page coming soon</p>
+      <div className="hero-section">
+        <div className="hero-left">
+          <h1 className="landing-headline">Tailor your resume <span className="accent-text">for every job</span></h1>
+          <p className="landing-subtitle">Paste any job description and get AI-matched suggestions from your own resume so you always know what to highlight</p>
+          <button className="cta-button">Get Started</button>
+        </div>
+        <div className="hero-right">
+          <p>Example</p>
+        </div>
+      </div>
     </div>
   );
 }
