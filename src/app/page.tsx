@@ -85,6 +85,21 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="cta-section">
+        <h2 className="cta-heading">Ready to tailor your next application</h2>
+        <button className="cta-button">Get Started</button>
+      </div>
+      <div className="site-footer">
+        <div className="footer-content">
+          <p className="footer-brand">Resume Tailor</p>
+          <p className="footer-copyright">© 2026 Resume Tailor</p>
+          <div className="footer-links">
+            <a href="/resume">Your Resume</a>
+            <a href="/tailor">Job Description</a>
+            <a href="/history">View History</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
