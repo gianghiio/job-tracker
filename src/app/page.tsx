@@ -64,7 +64,25 @@ export default function Home() {
           <button className="cta-button">Get Started</button>
         </div>
         <div className="hero-right">
-          <img src="/demo.png" alt="Example of resume matching results" className="preview-image" />
+          <img src="/demo.png" alt="Example of job description " className="preview-image" />
+        </div>
+      </div>
+      <div className="features-section">
+        <p className="features-label">Features</p>
+        <h2 className="features-headline">Everything you need to apply with confidence</h2>
+        <div className="features-grid">
+          <div className="feature-card">
+            <h3 className="feature-card-title">Smart Resume Matching</h3>
+            <p className="feature-card-description">See exactly which parts of your resume to emphasize for each specific job, powered by AI</p>
+          </div>
+          <div className="feature-card">
+            <h3 className="feature-card-title">Track every application</h3>
+            <p className="feature-card-description">Every job you analyze is saved automatically, so you can revisit and compare your applications anytime</p>
+          </div>
+          <div className="feature-card">
+            <h3 className="feature-card-title">One Upload, Every Job</h3>
+            <p className="feature-card-description">Upload your resume once. Reuse it instantly for every job you apply to, no re-uploading needed</p>
+          </div>
         </div>
       </div>
     </div>
