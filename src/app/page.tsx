@@ -85,9 +85,18 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="cta-section">
-        <h2 className="cta-heading">Ready to tailor your next application</h2>
-        <button className="cta-button">Get Started</button>
+      <div className="story-cta-section">
+        <div className="story-content">
+          <p className="story-label">The Story</p>
+          <h2 className="story-heading">Built out of a real problem</h2>
+          <p className="story-text">
+            Job hunting means rewriting the same resume dozens of times. I built Resume Tailor to solve that for myself: pasting a job description and instantly seeing what to emphasize, instead of doing it by hand every time.
+          </p>
+        </div>
+        <div className="cta-card">
+          <h3 className="cta-card-heading">Ready to tailor your next application?</h3>
+          <button className="cta-button">Get Started</button>
+        </div>
       </div>
       <div className="site-footer">
         <div className="footer-content">
