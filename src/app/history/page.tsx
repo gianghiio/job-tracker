@@ -72,7 +72,7 @@ export default function History() {
         <div className="page-container">
             <div className="header">
                 <div className="brand-name">
-                <h1>Resume Tailor</h1>
+                    <Link href="/" className="brand-link"><h1>Resume Tailor</h1></Link>
                 </div>
                 <div className="nav-tag">
                     <Link href="/resume" className="resume-link">Your Resume</Link>
