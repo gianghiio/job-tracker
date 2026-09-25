@@ -126,6 +126,8 @@ body {
 }
 
 .cta-button {
+  display: inline-block;
+  text-decoration: none;
   align-self: flex-start;
   font-family: var(--font-inter);
   font-size: 0.95rem;

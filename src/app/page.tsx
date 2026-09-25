@@ -39,7 +39,7 @@ export default function Home() {
         <div className="hero-left">
           <h1 className="landing-headline">Tailor your resume <span className="accent-text">for every job</span></h1>
           <p className="landing-subtitle">Paste any job description and get AI-matched suggestions from your own resume so you always know what to highlight</p>
-          <button className="cta-button">Get Started</button>
+          <Link href="/resume" className="cta-button">Get Started</Link>
         </div>
         <div className="hero-right">
           <img src="/demo.png" alt="Example of job description " className="preview-image" />
@@ -73,13 +73,12 @@ export default function Home() {
         </div>
         <div className="cta-card">
           <h3 className="cta-card-heading">Ready to tailor your next application?</h3>
-          <button className="cta-button">Get Started</button>
+          <Link href="/tailor" className="cta-button">Get Started</Link>
         </div>
       </div>
       <div className="faq-section">
           <p className="faq-label">FAQ</p>
           <h2 className="faq-headline">Frequently asked questions</h2>
-
           {faq.map((item) => (
               <div key={item.id} className="faq-item">
                   <button className="faq-question" onClick={() => toggleQuestion(item.id)}>
