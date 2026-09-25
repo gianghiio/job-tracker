@@ -1,46 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import Link from "next/link";
 
 export default function Home() {
-  const [jobDescription, setJobDescription] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState ("");
-  const [companyName, setCompanyName] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const handleAnalyze = async () => {
-
-    if (!companyName || !jobTitle) {
-      setErrorMessage("Please fill in Company Name and Job Title");
-      return;
-    }
-    setErrorMessage("");
-    setLoading(true);
-    try{
-      // send the job description to back-end 
-      const response = await fetch("/api/tailor", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({companyName, jobTitle,jobDescription}),
-      })
-
-    // parse the response body from JSON text
-    const data = await response.json();
-      setResult(data.result);
-    } catch(error) {
-      // log for debugging
-      console.error("Error analyzing: ", error);
-      setResult("ERROR. Please try again")
-
-    } finally {
-      setLoading(false);
+  const [active, setActive] = useState<number | null>(null);
+  type FaqItem = { id: number; question: string; answer: string };
+  const faq: FaqItem[] = [
+    {id: 1, question: "Is my resume data safe?", answer: "Yes. Your resume is stored securely and only used to generate your own suggestions"},
+    {id: 2, question:"Is this free to use?", answer:"Yes, completely free"},
+    {id: 3, question:"Do I need to re-upload my resume every time?", answer: "No. upload once, and it's reused for every job you analyze."}
+  ]
+  const toggleQuestion = (id: number) => {
+    if (active === id) {
+      // If the question is already opened
+      setActive(null);
+    } else {
+      setActive(id);
     }
   }
-
   return (
     <div className="page-container">
       <div className="header">
@@ -97,6 +75,21 @@ export default function Home() {
           <h3 className="cta-card-heading">Ready to tailor your next application?</h3>
           <button className="cta-button">Get Started</button>
         </div>
+      </div>
+      <div className="faq-section">
+          <p className="faq-label">FAQ</p>
+          <h2 className="faq-headline">Frequently asked questions</h2>
+
+          {faq.map((item) => (
+              <div key={item.id} className="faq-item">
+                  <button className="faq-question" onClick={() => toggleQuestion(item.id)}>
+                      {item.question}
+                      <span className="faq-icon">{active === item.id ? "−" : "+"}</span>
+                  </button>
+                  {/* only show the answer for the open question */}
+                  {active === item.id && <p className="faq-answer">{item.answer}</p>}
+              </div>
+          ))}
       </div>
       <div className="site-footer">
         <div className="footer-content">
