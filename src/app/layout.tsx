@@ -20,7 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable}>
       <body>
         {/* ClerkProvider goes inside body, wrapping the whole app */}
-        <ClerkProvider>{children}</ClerkProvider>
+        <ClerkProvider appearance={{ cssLayerName: "clerk" }}>
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );

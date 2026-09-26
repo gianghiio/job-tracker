@@ -96,6 +96,60 @@ body {
   color:#689D4B;
 }
 
+/*AUTH*/
+/* CLERK (sign in / sign up / profile popups) */
+.cl-card {
+  font-family: var(--font-inter), sans-serif;
+  border: 1px solid #D8DBD6;
+  border-radius: 8px;
+}
+
+.cl-headerTitle {
+  color: #14181B;
+  font-weight: 700;
+}
+
+.cl-headerSubtitle {
+  color: #3D5A6C;
+}
+
+/* "Continue with Google" button */
+.cl-socialButtonsBlockButton {
+  border: 1px solid #D8DBD6;
+  border-radius: 4px;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  background-color: #EAF3DE;
+}
+
+/* Main "Continue" button */
+.cl-formButtonPrimary {
+  background-color: #689D4B;
+  color: #14181B;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.cl-formButtonPrimary:hover {
+  background-color: #91AE6E;
+}
+
+/* Email input */
+.cl-formFieldInput {
+  border: 1px solid #D8DBD6;
+  border-radius: 4px;
+}
+
+.cl-formFieldInput:focus {
+  box-shadow: 0 0 0 2px #689D4B;
+}
+
+/* "Sign up" / "Sign in" link at the bottom */
+.cl-footerActionLink {
+  color: #689D4B;
+}
+
 /*HERO*/
 .hero-section {
   display: grid;
