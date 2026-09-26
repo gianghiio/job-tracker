@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [active, setActive] = useState<number | null>(null);
@@ -21,20 +22,7 @@ export default function Home() {
   }
   return (
     <div className="page-container">
-      <div className="header">
-        <div className="brand-name">
-          <Link href="/" className="brand-link"><h1>Resume Tailor</h1></Link>
-        </div>
-        <div className="nav-tag">
-            <Link href="/resume" className="resume-link">Your Resume</Link>
-            <Link href="/tailor" className="job-link">Job Description</Link>
-            <Link href="/history" className="history-link">View history</Link>
-        </div>  
-        <div className="auth">
-          <button className="log-in">Log In</button>
-          <button className="sign-up">Sign Up</button>
-        </div>
-      </div>
+      <Header></Header>
       <div className="hero-section">
         <div className="hero-left">
           <h1 className="landing-headline">Tailor your resume <span className="accent-text">for every job</span></h1>
