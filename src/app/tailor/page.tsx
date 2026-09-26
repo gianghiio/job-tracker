@@ -4,6 +4,7 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
@@ -43,20 +44,7 @@ export default function Home() {
 
   return (
     <div className="page-container">
-      <div className="header">
-        <div className="brand-name">
-          <Link href="/" className="brand-link"><h1>Resume Tailor</h1></Link>
-        </div>
-        <div className="nav-tag">
-            <Link href="/resume" className="resume-link">Your Resume</Link>
-            <Link href="/tailor" className="job-link">Job Description</Link>
-            <Link href="/history" className="history-link">View history</Link>
-        </div>  
-        <div className="auth">
-          <button className="log-in">Log In</button>
-          <button className="sign-up">Sign Up</button>
-        </div>
-      </div>
+      <Header></Header>
       <h1 className="page-heading">Jon Analysis</h1>
       <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
       <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />

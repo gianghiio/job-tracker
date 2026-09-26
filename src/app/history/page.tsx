@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header";
 
 type Application = {
     id: number;
@@ -70,20 +71,7 @@ export default function History() {
 
     return (
         <div className="page-container">
-            <div className="header">
-                <div className="brand-name">
-                    <Link href="/" className="brand-link"><h1>Resume Tailor</h1></Link>
-                </div>
-                <div className="nav-tag">
-                    <Link href="/resume" className="resume-link">Your Resume</Link>
-                    <Link href="/tailor" className="job-link">Job Description</Link>
-                    <Link href="/history" className="history-link">View history</Link>
-                </div>  
-                <div className="auth">
-                    <button className="log-in">Log In</button>
-                    <button className="sign-up">Sign Up</button>
-                </div>
-            </div>
+            <Header></Header>
             <h1 className="page-loading">History</h1>
             <p className="page-subtitle">Your analyzed job applications</p>
 
