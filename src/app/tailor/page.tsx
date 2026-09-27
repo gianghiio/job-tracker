@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <div className="page-container">
       <Header></Header>
-      <h1 className="page-heading">Jon Analysis</h1>
+      <h1 className="page-heading">Job Analysis</h1>
       <p className="page-subtitle">Paste the Job Description to see what to emphasize</p>
       <input type="text" className="text-input" placeholder="Company name" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
       <input type="text" className="text-input" placeholder="Job Title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} />
