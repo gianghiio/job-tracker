@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [active, setActive] = useState<number | null>(null);
@@ -78,17 +79,7 @@ export default function Home() {
               </div>
           ))}
       </div>
-      <div className="site-footer">
-        <div className="footer-content">
-          <p className="footer-brand">Resume Tailor</p>
-          <p className="footer-copyright">© 2026 Resume Tailor</p>
-          <div className="footer-links">
-            <a href="/resume">Your Resume</a>
-            <a href="/tailor">Job Description</a>
-            <a href="/history">View History</a>
-          </div>
-        </div>
-      </div>
+      <Footer></Footer>
     </div>
   );
 }
