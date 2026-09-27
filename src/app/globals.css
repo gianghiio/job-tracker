@@ -13,8 +13,9 @@ body {
   background-color: #F5F6F4;
   color: #14181B;
   font-family: var(--font-inter);
-  padding: 0rem 2rem;
+  padding: 0 2rem 6rem; 
   overflow-x: hidden;
+  position: relative;   
 }
 
 /* HEADER */
@@ -413,8 +414,12 @@ body {
 
 /*FOOTER*/
 .site-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;            
   background-color: #294a1e;
-  padding: 2rem 3rem;
+  padding: 1.75rem 2rem;
 }
 
 .footer-content {
@@ -423,8 +428,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  max-width: 100%;
-  margin: 0 auto;
 }
 
 .footer-brand {
@@ -458,6 +461,13 @@ body {
   color: #91AE6E;
 }
 
+@media (max-width: 700px) {
+  .page-container {padding-bottom: 14rem;}
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 
 .page-heading {
   font-size: 1.875rem;
