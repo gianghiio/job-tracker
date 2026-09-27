@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 type Application = {
     id: number;
@@ -110,6 +111,7 @@ export default function History() {
                     </div>
                 </div>
             )}
+            <Footer></Footer>
         </div>
     )
 

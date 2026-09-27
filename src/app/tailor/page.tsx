@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [jobDescription, setJobDescription] = useState("");
@@ -67,6 +68,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      <Footer></Footer>
     </div>
   );
 }

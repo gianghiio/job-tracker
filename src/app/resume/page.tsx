@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function Resume() {
     // holds the selected file or undefined if nothing's chosen
@@ -40,6 +41,7 @@ export default function Resume() {
             {error && <p className="error-text">{error}</p>}
             {/* Test result */}
             {file && <p>Selected file: {file.name}</p> }
+            <Footer></Footer>
         </div>
     )
 }
