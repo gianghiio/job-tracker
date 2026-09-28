@@ -19,10 +19,12 @@ model JobApplication {
   jobDescription String
   result String?
   createdAt   DateTime @default(now())
+  userId      String?
 }
 
 model Resume {
   id Int @id @default(autoincrement())
   content String
   uploadedAt DateTime @default(now())
+  userId  String?
 }
