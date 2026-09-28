@@ -38,18 +38,21 @@ export type ResumeMinAggregateOutputType = {
   id: number | null
   content: string | null
   uploadedAt: Date | null
+  userId: string | null
 }
 
 export type ResumeMaxAggregateOutputType = {
   id: number | null
   content: string | null
   uploadedAt: Date | null
+  userId: string | null
 }
 
 export type ResumeCountAggregateOutputType = {
   id: number
   content: number
   uploadedAt: number
+  userId: number
   _all: number
 }
 
@@ -66,18 +69,21 @@ export type ResumeMinAggregateInputType = {
   id?: true
   content?: true
   uploadedAt?: true
+  userId?: true
 }
 
 export type ResumeMaxAggregateInputType = {
   id?: true
   content?: true
   uploadedAt?: true
+  userId?: true
 }
 
 export type ResumeCountAggregateInputType = {
   id?: true
   content?: true
   uploadedAt?: true
+  userId?: true
   _all?: true
 }
 
@@ -171,6 +177,7 @@ export type ResumeGroupByOutputType = {
   id: number
   content: string
   uploadedAt: Date
+  userId: string | null
   _count: ResumeCountAggregateOutputType | null
   _avg: ResumeAvgAggregateOutputType | null
   _sum: ResumeSumAggregateOutputType | null
@@ -200,12 +207,14 @@ export type ResumeWhereInput = {
   id?: Prisma.IntFilter<"Resume"> | number
   content?: Prisma.StringFilter<"Resume"> | string
   uploadedAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Resume"> | string | null
 }
 
 export type ResumeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -215,12 +224,14 @@ export type ResumeWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ResumeWhereInput | Prisma.ResumeWhereInput[]
   content?: Prisma.StringFilter<"Resume"> | string
   uploadedAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Resume"> | string | null
 }, "id">
 
 export type ResumeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ResumeCountOrderByAggregateInput
   _avg?: Prisma.ResumeAvgOrderByAggregateInput
   _max?: Prisma.ResumeMaxOrderByAggregateInput
@@ -235,51 +246,60 @@ export type ResumeScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Resume"> | number
   content?: Prisma.StringWithAggregatesFilter<"Resume"> | string
   uploadedAt?: Prisma.DateTimeWithAggregatesFilter<"Resume"> | Date | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Resume"> | string | null
 }
 
 export type ResumeCreateInput = {
   content: string
   uploadedAt?: Date | string
+  userId?: string | null
 }
 
 export type ResumeUncheckedCreateInput = {
   id?: number
   content: string
   uploadedAt?: Date | string
+  userId?: string | null
 }
 
 export type ResumeUpdateInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ResumeUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ResumeCreateManyInput = {
   id?: number
   content: string
   uploadedAt?: Date | string
+  userId?: string | null
 }
 
 export type ResumeUpdateManyMutationInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ResumeUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   content?: Prisma.StringFieldUpdateOperationsInput | string
   uploadedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ResumeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ResumeAvgOrderByAggregateInput = {
@@ -290,12 +310,14 @@ export type ResumeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ResumeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
   uploadedAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
 }
 
 export type ResumeSumOrderByAggregateInput = {
@@ -308,27 +330,31 @@ export type ResumeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   content?: boolean
   uploadedAt?: boolean
+  userId?: boolean
 }, ExtArgs["result"]["resume"]>
 
 export type ResumeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   content?: boolean
   uploadedAt?: boolean
+  userId?: boolean
 }, ExtArgs["result"]["resume"]>
 
 export type ResumeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   content?: boolean
   uploadedAt?: boolean
+  userId?: boolean
 }, ExtArgs["result"]["resume"]>
 
 export type ResumeSelectScalar = {
   id?: boolean
   content?: boolean
   uploadedAt?: boolean
+  userId?: boolean
 }
 
-export type ResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "uploadedAt", ExtArgs["result"]["resume"]>
+export type ResumeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "uploadedAt" | "userId", ExtArgs["result"]["resume"]>
 
 export type $ResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Resume"
@@ -337,6 +363,7 @@ export type $ResumePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: number
     content: string
     uploadedAt: Date
+    userId: string | null
   }, ExtArgs["result"]["resume"]>
   composites: {}
 }
@@ -763,6 +790,7 @@ export interface ResumeFieldRefs {
   readonly id: Prisma.FieldRef<"Resume", 'Int'>
   readonly content: Prisma.FieldRef<"Resume", 'String'>
   readonly uploadedAt: Prisma.FieldRef<"Resume", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Resume", 'String'>
 }
     
 

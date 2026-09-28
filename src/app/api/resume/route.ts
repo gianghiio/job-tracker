@@ -2,8 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 // @ts-ignore
 import pdf from "pdf-parse/lib/pdf-parse.js";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
+    // Get the logged-in user's id
+    const { userId } = await auth();
+    if (!userId) {
+        return NextResponse.json(
+            { error: "Unauthorized" }, 
+            { status: 401 }
+        );
+    }
     try {
         // read the incoming FormData
         const formData = await req.formData();
@@ -33,19 +42,12 @@ export async function POST(req: NextRequest) {
         const extractedText = data.text;
         console.log(extractedText);
 
-        // check if a resume already exists, update it instead of creating a duplicate
-        const existingResume = await prisma.resume.findFirst();
-
-        if (existingResume) {
-            await prisma.resume.update({
-                where: { id: existingResume.id },
-                data: { content: extractedText },
-            });
-        } else {
-            await prisma.resume.create({
-                data: { content: extractedText },
-            });
-        }
+        // update this user's resume if they have one, otherwise create it
+        await prisma.resume.upsert({
+            where: { userId },
+            update: { content: extractedText, uploadedAt: new Date() },
+            create: { content: extractedText, userId },
+        });
 
         return NextResponse.json(
             { success: true, preview: extractedText.slice(0, 300) }
