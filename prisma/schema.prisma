@@ -26,5 +26,5 @@ model Resume {
   id Int @id @default(autoincrement())
   content String
   uploadedAt DateTime @default(now())
-  userId  String?
+  userId  String? @unique
 }

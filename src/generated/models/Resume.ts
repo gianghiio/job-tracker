@@ -219,13 +219,13 @@ export type ResumeOrderByWithRelationInput = {
 
 export type ResumeWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId?: string
   AND?: Prisma.ResumeWhereInput | Prisma.ResumeWhereInput[]
   OR?: Prisma.ResumeWhereInput[]
   NOT?: Prisma.ResumeWhereInput | Prisma.ResumeWhereInput[]
   content?: Prisma.StringFilter<"Resume"> | string
   uploadedAt?: Prisma.DateTimeFilter<"Resume"> | Date | string
-  userId?: Prisma.StringNullableFilter<"Resume"> | string | null
-}, "id">
+}, "id" | "userId">
 
 export type ResumeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
