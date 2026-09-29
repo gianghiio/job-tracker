@@ -2,6 +2,9 @@
 
 A tool to help tailor resumes and applications to specific job postings. Paste a job description, and Claude (Anthropic's AI) extracts the key requirements, skills, and qualifications so you know exactly what to emphasize. Every analysis is saved, so you can build a searchable history of every job you've applied to.
 
+Live Demo:
+https://job-tracker-hazel-one.vercel.app
+
 ## Features
 
 - **AI-powered analysis** — paste any job description and get a clean, structured breakdown of key requirements using Claude
@@ -53,3 +56,13 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+## Roadmap
+
+Job analysis with Claude
+PDF resume upload and resume-to-job matching
+History with search and delete
+Landing page with FAQ
+Sign in with Google and email (Clerk)
+Per-user resumes and history
+Application status tracking (Applied / Interviewing / Rejected / Offer)
