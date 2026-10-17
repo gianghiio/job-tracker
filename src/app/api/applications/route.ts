@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
 
 export async function GET() {
     try {
-        // fetch all applications by newest
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+        // fetch all user's applications by newest
         const applications = await prisma.jobApplication.findMany({
+            where: {userId},
             orderBy: {createdAt: "desc"},
         })
 
@@ -20,12 +26,20 @@ export async function GET() {
 
 export async function DELETE(req: NextRequest) {
     try {
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
         const {id} = await req.json();
-        await prisma.jobApplication.delete({
-            where: {id},
-        })
+        const result = await prisma.jobApplication.deleteMany({
+            where: { id, userId },
+        });
 
-        return NextResponse.json({success: true});
+        if (result.count === 0) {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true });
 
     } catch (error) {
         console.error("Error deleting application", error);

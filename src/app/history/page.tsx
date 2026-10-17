@@ -25,8 +25,13 @@ export default function History() {
         const fetchApplications = async() => {
             try{
                 const response = await fetch("/api/applications");
+                if (!response.ok) {
+                    setApplications([]);
+                    return;
+                }
+
                 const data = await response.json();
-                setApplications(data.applications);
+                setApplications(data.applications ?? []);
             } catch(error) {
                 console.error("Failed to load history", error);
             } finally {
