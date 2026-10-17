@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Show, SignInButton } from "@clerk/nextjs";
 
 type Application = {
     id: number;
@@ -73,44 +74,51 @@ export default function History() {
     return (
         <div className="page-container">
             <Header></Header>
-            <h1 className="page-loading">History</h1>
-            <p className="page-subtitle">Your analyzed job applications</p>
+            <Show when="signed-out">
+                <p className="page-subtitle">Log in to see your analyzed jobs.</p>
+            </Show>
 
-            <div className="search-function">
-                <input className="search-area" placeholder="Search for Company Name or Job Title" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
-            </div>
-            {loading && <p>Loading...</p>}
-            {!loading && applications.length === 0 && (
-                <p>No applications found</p>
-            )}
-            {!loading && (
-                <p className="results-count">
-                    Showing {filteredApplication.length} of {applications.length}
-                </p>
-            )}
+            <Show when="signed-in">
+                <h1 className="page-loading">History</h1>
+                <p className="page-subtitle">Your analyzed job applications</p>
 
-            {filteredApplication.map((app) => (
-                <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
-                    <div className="history-item-header">
-                        <h2 className="history-title">{app.jobTitle}</h2>
-                        <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
-                    </div>
-                    <p className="history-company">{app.companyName}</p>
-                    <p className="history-date">{new Date(app.createdAt).toLocaleDateString()}</p>
+                <div className="search-function">
+                    <input className="search-area" placeholder="Search for Company Name or Job Title" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
                 </div>
-            ))}
+                {loading && <p>Loading...</p>}
+                {!loading && applications.length === 0 && (
+                    <p>No applications found</p>
+                )}
+                {!loading && (
+                    <p className="results-count">
+                        Showing {filteredApplication.length} of {applications.length}
+                    </p>
+                )}
 
-            {selectedApp && (
-                <div className="modal-overlay" onClick={() => setSelectedApp(null)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-close" onClick={() => setSelectedApp(null)}>×</button>
-                        <h2 className="history-title">{selectedApp.jobTitle}</h2>
-                        <p className="history-company">{selectedApp.companyName}</p>
-                        <h3 className="history-subheading">Job Description</h3>
-                        <p className="history-job-description">{selectedApp.jobDescription}</p>
+                {filteredApplication.map((app) => (
+                    <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
+                        <div className="history-item-header">
+                            <h2 className="history-title">{app.jobTitle}</h2>
+                            <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
+                        </div>
+                        <p className="history-company">{app.companyName}</p>
+                        <p className="history-date">{new Date(app.createdAt).toLocaleDateString()}</p>
                     </div>
-                </div>
-            )}
+                ))}
+
+                {selectedApp && (
+                    <div className="modal-overlay" onClick={() => setSelectedApp(null)}>
+                        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                            <button className="modal-close" onClick={() => setSelectedApp(null)}>×</button>
+                            <h2 className="history-title">{selectedApp.jobTitle}</h2>
+                            <p className="history-company">{selectedApp.companyName}</p>
+                            <h3 className="history-subheading">Job Description</h3>
+                            <p className="history-job-description">{selectedApp.jobDescription}</p>
+                        </div>
+                    </div>
+                )}
+            </Show>
+
             <Footer></Footer>
         </div>
     )
