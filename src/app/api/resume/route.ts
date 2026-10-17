@@ -5,15 +5,15 @@ import pdf from "pdf-parse/lib/pdf-parse.js";
 import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
-    // Get the logged-in user's id
-    const { userId } = await auth();
-    if (!userId) {
-        return NextResponse.json(
-            { error: "Unauthorized" }, 
-            { status: 401 }
-        );
-    }
     try {
+        // Get the logged-in user's id
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json(
+                { error: "Unauthorized" }, 
+                { status: 401 }
+            );
+        }
         // read the incoming FormData
         const formData = await req.formData();
         const file = formData.get("resume") as File | null;
@@ -41,6 +41,14 @@ export async function POST(req: NextRequest) {
         const data = await pdf(buffer);
         const extractedText = data.text;
         console.log(extractedText);
+
+        // scanned PDFs have no text to read
+        if (!extractedText.trim()) {
+            return NextResponse.json(
+                { error: "Couldn't read any text from this PDF. Try one exported from Word or Google Docs." },
+                { status: 422 }
+            );
+        }
 
         // update this user's resume if they have one, otherwise create it
         await prisma.resume.upsert({
