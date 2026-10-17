@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
     try {
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         // get the job description sent from front-end
         const { companyName, jobTitle, jobDescription } = await req.json();
 
@@ -11,9 +17,9 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "Job Description is required" }, { status: 400 });
         }
 
-        // fetch the saved resume
-        const resume = await prisma.resume.findFirst();
-        
+        // Fetch the logged in user's resume
+        const resume = await prisma.resume.findFirst({ where: { userId } });
+
         // build the prompt differently given on existed resume
         let promptContent : string;
 
@@ -58,6 +64,7 @@ export async function POST(req: NextRequest) {
                 jobTitle: jobTitle || "Unknown",
                 jobDescription: jobDescription,
                 result: extractedText,
+                userId,
             },
         });
 
