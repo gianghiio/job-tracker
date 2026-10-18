@@ -33,8 +33,8 @@ export default function Resume() {
     return (
         <div className="page-container">
             <Header></Header>
-            <h1 className="page-heading">Resume</h1>
-            <p className="page-subtitle">Upload your resume as the PDF file</p>
+            <h1 className="page-heading">Your Resume</h1>
+            <p className="page-subtitle">Upload once. It's matched against every job you analyze</p>
             <input type="file" accept=".pdf" ref={resumeInput} onChange={onChange} style={{display: "none"}}/>
             <button className='upload-btn' onClick={() => resumeInput.current?.click()}>Choose File</button>
             <button className='upload-btn' onClick={handleUpload}>Upload Resume</button>
