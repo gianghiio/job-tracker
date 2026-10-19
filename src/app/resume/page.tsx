@@ -31,17 +31,35 @@ export default function Resume() {
         })
     }
     return (
-        <div className="page-container">
-            <Header></Header>
-            <h1 className="page-heading">Your Resume</h1>
-            <p className="page-subtitle">Upload once. It's matched against every job you analyze</p>
-            <input type="file" accept=".pdf" ref={resumeInput} onChange={onChange} style={{display: "none"}}/>
-            <button className='upload-btn' onClick={() => resumeInput.current?.click()}>Choose File</button>
-            <button className='upload-btn' onClick={handleUpload}>Upload Resume</button>
-            {error && <p className="error-text">{error}</p>}
-            {/* Test result */}
-            {file && <p>Selected file: {file.name}</p> }
-            <Footer></Footer>
+    <div className="page-container">
+        <Header></Header>
+        <div className="resume-wrap">
+            <h1 className="page-heading">Your resume</h1>
+            <p className="page-subtitle">Upload once. It's matched against every job you analyze.</p>
+
+            <div className="resume-status">
+                <div>
+                    <p className="resume-status-title">Resume on file</p>
+                    <p className="resume-status-meta">Uploaded your resume</p>
+                </div>
+                <button className="delete-button">Delete</button>
+            </div>
+
+            <div className="drop-zone">
+                <p className="drop-zone-title">Drag a PDF here, or choose a file</p>
+                <p className="drop-zone-hint">PDF only</p>
+            </div>
+
+            <div className="resume-preview">
+                <p className="resume-preview-label">What we read from your resume</p>
+            </div>
+
+            <div className="resume-footer-row">
+                <p className="resume-footer-note">Resume updated - Ready to match</p>
+                <Link href="/tailor" className="cta-button">Analyze a job </Link>
+            </div>
         </div>
+        <Footer></Footer>
+    </div>
     )
 }
