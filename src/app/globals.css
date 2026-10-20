@@ -791,3 +791,9 @@ body {
 .resume-actions {
   margin-bottom: 1rem;
 }
+.success-text {
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  color: var(--success);
+  margin-bottom: 1rem;
+}
