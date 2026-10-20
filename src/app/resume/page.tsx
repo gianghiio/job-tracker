@@ -9,6 +9,7 @@ export default function Resume() {
     const [file, setFile] = useState<File | undefined>(undefined);
     const resumeInput = useRef<HTMLInputElement>(null);
     const [error, setError] = useState("");
+    const [dragging, setDragging] = useState(false);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -29,6 +30,18 @@ export default function Resume() {
             method: "POST",
             body: formData,
         })
+    }
+
+    const pickFile = (f:File | undefined) => {
+        if (!f) {
+            return;
+        }
+        if (f.type !== "application/pdf") {
+            setError("Only PDF files are supported");
+            return;
+        }
+        setError("");
+        setFile(f);
     }
     return (
     <div className="page-container">
