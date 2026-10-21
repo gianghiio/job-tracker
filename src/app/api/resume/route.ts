@@ -33,6 +33,14 @@ export async function POST(req: NextRequest) {
             )
         }
 
+        // reject files over 4 MB 
+        if (file.size > 4 * 1024 * 1024) {
+            return NextResponse.json(
+                {error: "File is too large - Keep it under 4 MB"},
+                {status: 413}
+            )
+        }
+
         // convert the uploaded file into a Buffer, which pdf-parse needs
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
