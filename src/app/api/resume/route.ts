@@ -70,22 +70,34 @@ export async function POST(req: NextRequest) {
 }
 // Get the specific resume based on logged in user
 export async function GET() {
-    const { userId } = await auth();
-    if (!userId) {
-        return NextResponse.json(
-            { error: "Unauthorized" }, 
-            { status: 401 }
-        );
-    }
+    try {
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json(
+                { error: "Unauthorized" }, 
+                { status: 401 }
+            );
+        }
 
-    const resume = await prisma.resume.findUnique({ where: { userId } });
+        const resume = await prisma.resume.findUnique({ where: { userId } });
 
-    if (!resume) {
+        if (!resume) {
+            return NextResponse.json(
+                { resume: null }
+            );
+        }
+        const text = resume.content.replace(/\s+/g, " ").trim();
+        return NextResponse.json({ 
+            resume: { 
+                uploadedAt: resume.uploadedAt,
+                preview: text.slice(0,300),
+            }
+        });
+    } catch (error) {
+        console.error("Error loading resume", error);
         return NextResponse.json(
-            { resume: null }
-        );
+            {error: "Failed to load resume"},
+            {status: 500}
+        )
     }
-    return NextResponse.json(
-        { resume: { uploadedAt: resume.uploadedAt } }
-    );
 }
