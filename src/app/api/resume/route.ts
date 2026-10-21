@@ -40,7 +40,6 @@ export async function POST(req: NextRequest) {
         // extract plain text from the PDF
         const data = await pdf(buffer);
         const extractedText = data.text;
-        console.log(extractedText);
 
         // scanned PDFs have no text to read
         if (!extractedText.trim()) {
@@ -68,4 +67,25 @@ export async function POST(req: NextRequest) {
             {status: 500}
         )
     }
+}
+// Get the specific resume based on logged in user
+export async function GET() {
+    const { userId } = await auth();
+    if (!userId) {
+        return NextResponse.json(
+            { error: "Unauthorized" }, 
+            { status: 401 }
+        );
+    }
+
+    const resume = await prisma.resume.findUnique({ where: { userId } });
+
+    if (!resume) {
+        return NextResponse.json(
+            { resume: null }
+        );
+    }
+    return NextResponse.json(
+        { resume: { uploadedAt: resume.uploadedAt } }
+    );
 }
