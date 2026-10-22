@@ -96,6 +96,12 @@ export default function Resume() {
                     </button>
                 </div>
             )}
+            {success && (
+                <div className="resume-footer-row">
+                    <p className="resume-footer-note">Ready to match.</p>
+                    <Link href="/tailor" className="cta-button">Analyze a job</Link>
+                </div>
+            )}
         </div>
         <Footer></Footer>
     </div>
