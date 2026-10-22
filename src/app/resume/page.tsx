@@ -68,14 +68,6 @@ export default function Resume() {
             <h1 className="page-heading">Your resume</h1>
             <p className="page-subtitle">Upload once. It's matched against every job you analyze.</p>
 
-            <div className="resume-status">
-                <div>
-                    <p className="resume-status-title">Resume on file</p>
-                    <p className="resume-status-meta">Uploaded your resume</p>
-                </div>
-                <button className="delete-button">Delete</button>
-            </div>
-
             <input type="file" accept=".pdf" ref={resumeInput} style={{ display: "none" }} onChange={(e) => {
                     pickFile(e.target.files?.[0]);
                     e.target.value = "";
@@ -104,15 +96,6 @@ export default function Resume() {
                     </button>
                 </div>
             )}
-
-            <div className="resume-preview">
-                <p className="resume-preview-label">What we read from your resume</p>
-            </div>
-
-            <div className="resume-footer-row">
-                <p className="resume-footer-note">Resume updated - Ready to match</p>
-                <Link href="/tailor" className="cta-button">Analyze a job </Link>
-            </div>
         </div>
         <Footer></Footer>
     </div>
