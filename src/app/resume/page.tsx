@@ -58,6 +58,11 @@ export default function Resume() {
             setError("Only PDF files are supported");
             return;
         }
+
+        if (f.size > 4 * 1024 * 1024) {
+            setError("File is too large - Keep it under 4 MB");
+            return;
+        }
         setError("");
         setFile(f);
     }
@@ -82,7 +87,7 @@ export default function Resume() {
                 onDrop={(e) => {e.preventDefault();setDragging(false); pickFile(e.dataTransfer.files[0]);}}
             >
                 <p className="drop-zone-title">{file ? file.name : "Drag a PDF here, or choose a file"}</p>
-                <p className="drop-zone-hint">PDF only</p>
+                <p className="drop-zone-hint">PDF only - under 4 MB</p>
             </div>
 
             {/*error message and the Upload button (only after a file is chosen) */}
