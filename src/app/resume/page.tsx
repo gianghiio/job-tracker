@@ -64,6 +64,7 @@ export default function Resume() {
             return;
         }
         setError("");
+        setSuccess("");
         setFile(f);
     }
     return (
