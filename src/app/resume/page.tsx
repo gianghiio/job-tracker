@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,6 +14,8 @@ export default function Resume() {
     const [uploading, setUploading] = useState(false);
     // message shown after a successful upload resume
     const [success, setSuccess] = useState("");
+    // largest file size can be accepted
+    const MAX_SIZE = 4 * 1024 * 1024;
 
     const handleUpload = async() =>  {
         if (!file) {
@@ -50,7 +52,7 @@ export default function Resume() {
 
 
     const pickFile = (f: File | undefined) => {
-        if (!f) {
+        if (!f || uploading) {
             return;
         }
         // check the type of dragged file
@@ -59,7 +61,7 @@ export default function Resume() {
             return;
         }
 
-        if (f.size > 4 * 1024 * 1024) {
+        if (f.size > MAX_SIZE) {
             setError("File is too large - Keep it under 4 MB");
             return;
         }
