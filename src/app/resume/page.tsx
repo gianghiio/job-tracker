@@ -84,7 +84,15 @@ export default function Resume() {
 
             <div
                 className={`drop-zone ${dragging ? "dragging" : ""}`}
+                role="button"
+                tabIndex={0}
                 onClick={() => resumeInput.current?.click()}
+                 onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        resumeInput.current?.click();
+                    }
+                }}
                 onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
                 onDragLeave={() => setDragging(false)}
                 onDrop={(e) => {e.preventDefault();setDragging(false); pickFile(e.dataTransfer.files[0]);}}
