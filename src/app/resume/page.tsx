@@ -1,8 +1,10 @@
 "use client";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+type ResumeStatus = { uploadedAt: string; preview: string } | null;
 
 export default function Resume() {
     // holds the selected file or undefined if nothing's chosen
@@ -16,6 +18,29 @@ export default function Resume() {
     const [success, setSuccess] = useState("");
     // largest file size can be accepted
     const MAX_SIZE = 4 * 1024 * 1024;
+    // show status once the resume is uploaded
+    const [status, setStatus] = useState<ResumeStatus>(null);
+
+    const loadStatus = async () => {
+        try {
+            const response = await fetch("/api/resume");
+            // signed out or a server error: treat it as nothing on file
+            if (!response.ok) {
+                setStatus(null);
+                return;
+            }
+            const data = await response.json();
+            console.log("status", data.resume); 
+            setStatus(data.resume);
+        } catch (error) {
+            console.error("Failed to load resume status", error);
+        }
+    };
+
+    // run once when the page first loads
+    useEffect(() => {
+        loadStatus();
+    }, []);
 
     const handleUpload = async() =>  {
         if (!file) {

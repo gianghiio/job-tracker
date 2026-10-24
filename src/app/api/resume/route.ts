@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 // @ts-ignore
 import pdf from "pdf-parse/lib/pdf-parse.js";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server"
+
+const MAX_SIZE = 4 * 1024 * 1024;
 
 export async function POST(req: NextRequest) {
     try {
@@ -34,7 +36,7 @@ export async function POST(req: NextRequest) {
         }
 
         // reject files over 4 MB 
-        if (file.size > 4 * 1024 * 1024) {
+        if (file.size > MAX_SIZE) {
             return NextResponse.json(
                 {error: "File is too large - Keep it under 4 MB"},
                 {status: 413}
