@@ -111,10 +111,6 @@ export default function Resume() {
                             </p>
                         </div>
                     </div>
-                    <div className="resume-preview">
-                        <p className="resume-preview-label">What we read from your resume</p>
-                        <p className="resume-preview-text">{status.preview}...</p>
-                    </div>
                 </>
             )}
 

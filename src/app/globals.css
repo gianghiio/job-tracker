@@ -802,9 +802,3 @@ body {
   color: var(--success);
   margin-bottom: 1rem;
 }
-
-.resume-preview-text {
-  margin: 0;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
