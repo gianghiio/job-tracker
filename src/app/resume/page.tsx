@@ -100,6 +100,23 @@ export default function Resume() {
         <div className="resume-wrap">
             <h1 className="page-heading">Your resume</h1>
             <p className="page-subtitle">Upload once. It's matched against every job you analyze.</p>
+            {status && (
+                <>
+                    <div className="resume-status">
+                        <div>
+                            <p className="resume-status-title">Resume on file</p>
+                            <p className="resume-status-meta">
+                                Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="resume-preview">
+                        <p className="resume-preview-label">What we read from your resume</p>
+                        <p className="resume-preview-text">{status.preview}...</p>
+                    </div>
+                </>
+            )}
 
             <input type="file" accept=".pdf" ref={resumeInput} style={{ display: "none" }} onChange={(e) => {
                     pickFile(e.target.files?.[0]);
