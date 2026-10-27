@@ -68,6 +68,7 @@ export default function Resume() {
             // saved resume if successful, so show the message and reset the drop zone
             setSuccess("Resume uploaded - It will be used for your next analysis");
             setFile(undefined);
+            await loadStatus;
         } catch (err) {
             setError("Upload failed - Please try again");
         } finally {
@@ -110,7 +111,6 @@ export default function Resume() {
                             </p>
                         </div>
                     </div>
-
                     <div className="resume-preview">
                         <p className="resume-preview-label">What we read from your resume</p>
                         <p className="resume-preview-text">{status.preview}...</p>
@@ -154,7 +154,7 @@ export default function Resume() {
                     </button>
                 </div>
             )}
-            {success && (
+            {status && (
                 <div className="resume-footer-row">
                     <p className="resume-footer-note">Ready to match.</p>
                     <Link href="/tailor" className="cta-button">Analyze a job</Link>
