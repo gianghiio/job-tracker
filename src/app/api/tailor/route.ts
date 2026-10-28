@@ -12,6 +12,9 @@ export async function POST(req: NextRequest) {
         // get the job description sent from front-end
         const { companyName, jobTitle, jobDescription } = await req.json();
 
+        const cleanCompany = String(companyName ?? "").trim();
+        const cleanTitle = String(jobTitle ?? "").trim();
+
         // check whether the job description is empty
         if (!jobDescription || jobDescription.trim().length === 0) {
             return NextResponse.json({ error: "Job Description is required" }, { status: 400 });
@@ -60,8 +63,8 @@ export async function POST(req: NextRequest) {
         // save this analysis to the database
         await prisma.jobApplication.create({
             data: {
-                companyName: companyName || "Unknown",
-                jobTitle: jobTitle || "Unknown",
+                companyName: cleanCompany || "Unknown",
+                jobTitle: cleanTitle || "Unknown",
                 jobDescription: jobDescription,
                 result: extractedText,
                 userId,
