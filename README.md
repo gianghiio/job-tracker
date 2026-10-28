@@ -66,3 +66,5 @@ Landing page with FAQ
 Sign in with Google and email (Clerk)
 Per-user resumes and history
 Application status tracking (Applied / Interviewing / Rejected / Offer)
+Delete my resume button
+Suggested rewrites for resume bullets
