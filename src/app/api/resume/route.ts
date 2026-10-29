@@ -7,6 +7,13 @@ import { auth } from "@clerk/nextjs/server"
 const MAX_SIZE = 4 * 1024 * 1024;
 
 export async function POST(req: NextRequest) {
+    const SECTIONS: { name: string; pattern: RegExp }[] = [
+        { name: "Summary", pattern: /summary|profile|objective/i },
+        { name: "Skills", pattern: /skills/i },
+        { name: "Experience", pattern: /experience|employment/i },
+        { name: "Projects", pattern: /projects?/i },
+        { name: "Education", pattern: /education/i },
+    ];
     try {
         // Get the logged-in user's id
         const { userId } = await auth();
