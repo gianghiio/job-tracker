@@ -2,18 +2,31 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 // @ts-ignore
 import pdf from "pdf-parse/lib/pdf-parse.js";
-import { auth } from "@clerk/nextjs/server"
+import { auth } from "@clerk/nextjs/server";
 
 const MAX_SIZE = 4 * 1024 * 1024;
 
+// sections to look for, and the words that identify each heading
+const SECTIONS: { name: string; pattern: RegExp }[] = [
+    { name: "Summary", pattern: /summary|profile|objective/i },
+    { name: "Skills", pattern: /skills/i },
+    { name: "Experience", pattern: /experience|employment/i },
+    { name: "Projects", pattern: /projects?/i },
+    { name: "Education", pattern: /education/i },
+];
+
+function findSections(content: string): string[] {
+    const shortLines = content
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0 && line.length <= 40);
+
+    return SECTIONS
+        .filter((section) => shortLines.some((line) => section.pattern.test(line)))
+        .map((section) => section.name);
+}
+
 export async function POST(req: NextRequest) {
-    const SECTIONS: { name: string; pattern: RegExp }[] = [
-        { name: "Summary", pattern: /summary|profile|objective/i },
-        { name: "Skills", pattern: /skills/i },
-        { name: "Experience", pattern: /experience|employment/i },
-        { name: "Projects", pattern: /projects?/i },
-        { name: "Education", pattern: /education/i },
-    ];
     try {
         // Get the logged-in user's id
         const { userId } = await auth();
@@ -73,9 +86,8 @@ export async function POST(req: NextRequest) {
             create: { content: extractedText, userId },
         });
 
-        return NextResponse.json(
-            { success: true, preview: extractedText.slice(0, 300) }
-        );
+        // the page doesn't read anything else, and this keeps resume text out of the response
+        return NextResponse.json({ success: true });
 
     } catch (error) {
         console.error("Error processing resume upload", error);
@@ -85,6 +97,7 @@ export async function POST(req: NextRequest) {
         )
     }
 }
+
 // Get the specific resume based on logged in user
 export async function GET() {
     try {
@@ -103,11 +116,11 @@ export async function GET() {
                 { resume: null }
             );
         }
-        const text = resume.content.replace(/\s+/g, " ").trim();
+
         return NextResponse.json({ 
             resume: { 
                 uploadedAt: resume.uploadedAt,
-                preview: text.slice(0,300),
+                sections: findSections(resume.content),
             }
         });
     } catch (error) {
