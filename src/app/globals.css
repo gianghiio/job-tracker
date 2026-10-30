@@ -1,20 +1,31 @@
+/* =========================================================
+   DESIGN TOKENS
+   Every colour used in the app lives here. Change a value
+   once and it updates everywhere.
+   ========================================================= */
 :root {
-  --bg: #FAFAF9;
-  --surface: #FFFFFF;
-  --surface-muted: #F1F1EF;
+  --bg: #FAFAF9;            /* page background */
+  --surface: #FFFFFF;       /* cards, inputs, modals */
+  --surface-muted: #F1F1EF; /* hover backgrounds */
   --border: #E5E5E3;
   --text: #14181B;
-  --text-muted: #5B6168;  
+  --text-muted: #5B6168;
   --text-subtle: #6F757B;
-  --accent: #14181B;
+  --accent: #14181B;        /* buttons */
   --accent-hover: #3A3F45;
-  --on-accent: #FFFFFF;
+  --on-accent: #FFFFFF;     /* text on top of --accent */
   --danger: #A32D2D;
   --danger-bg: #FCEBEB;
-  --pill-bg: #BFC9D1;
+  --success: #2D6A3F;
+  --pill-bg: #BFC9D1;       /* small rounded labels and chips */
   --pill-text: #5B6168;
 }
 
+
+/* =========================================================
+   BASE
+   Resets and the shell that every page sits inside.
+   ========================================================= */
 * {
   box-sizing: border-box;
 }
@@ -24,18 +35,24 @@ body {
   padding: 0;
 }
 
+/* Wraps every page. Bottom padding leaves room for the
+   absolutely positioned footer. */
 .page-container {
   min-height: 100vh;
   width: 100%;
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-inter);
-  padding: 0 2rem 6rem; 
+  padding: 0 2rem 6rem;
   overflow-x: hidden;
-  position: relative;   
+  position: relative;
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+   Brand on the left, nav in the middle, auth on the right.
+   ========================================================= */
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,38 +60,9 @@ body {
   margin-bottom: 2rem;
 }
 
-.header-logo {
-  font-family: var(--font-inter);
-  font-size: 1.375rem;
-  font-weight: 700;
-  color: var(--text);
-  text-decoration: none;
-}
-
 .brand-link {
   color: inherit;
   text-decoration: none;
-}
-
-.auth {
-  display: flex;
-  align-items: center;
-}
-
-.sign-up, .log-in {
-  font-family: var(--font-inter);
-  font-size: 0.875rem;
-  background-color: var(--accent);
-  color: var(--on-accent);
-  border: none;
-  border-radius: 4px;
-  padding: 0.65rem 1.5rem;
-  cursor: pointer;
-  margin-left: 0.75rem;
-}
-
-.sign-up:hover, .log-in:hover {
-  background-color: var(--accent-hover);
 }
 
 .nav-tag {
@@ -95,8 +83,36 @@ body {
   color: var(--text);
 }
 
-/*AUTH*/
-/* CLERK (sign in / sign up / profile popups) */
+.auth {
+  display: flex;
+  align-items: center;
+}
+
+/* Log In and Sign Up buttons */
+.sign-up,
+.log-in {
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border: none;
+  border-radius: 4px;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  margin-left: 0.75rem;
+}
+
+.sign-up:hover,
+.log-in:hover {
+  background-color: var(--accent-hover);
+}
+
+
+/* =========================================================
+   CLERK
+   Restyles the sign in, sign up and profile popups so they
+   match the app. The cl- class names come from Clerk.
+   ========================================================= */
 .cl-card {
   font-family: var(--font-inter), sans-serif;
   border: 1px solid var(--border);
@@ -149,7 +165,12 @@ body {
   color: var(--text);
 }
 
-/*HERO*/
+
+/* =========================================================
+   LANDING PAGE: HERO
+   Headline and button on the left, screenshot on the right.
+   Stacks into one column on small screens.
+   ========================================================= */
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -171,6 +192,7 @@ body {
   margin: 0 0 1.25rem;
 }
 
+/* The grey highlighted words inside the headline */
 .accent-text {
   color: var(--text-subtle);
 }
@@ -183,6 +205,7 @@ body {
   max-width: 480px;
 }
 
+/* Main call-to-action button, used on landing and resume pages */
 .cta-button {
   display: inline-block;
   text-decoration: none;
@@ -202,21 +225,14 @@ body {
   background-color: var(--accent-hover);
 }
 
+/* Small note under the button ("Free account required...") */
 .cta-note {
   font-size: 0.8rem;
   color: var(--text-subtle);
   margin: 1rem 0 0;
 }
 
-@media (max-width: 700px) {
-  .hero-section {
-    grid-template-columns: 1fr;
-  }
-  .landing-headline {
-    font-size: 2rem;
-  }
-}
-
+/* Product screenshot */
 .preview-image {
   width: 100%;
   border: 1px solid var(--border);
@@ -224,13 +240,28 @@ body {
   display: block;
 }
 
-/*FEATURES SECTION*/
+@media (max-width: 700px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-headline {
+    font-size: 2rem;
+  }
+}
+
+
+/* =========================================================
+   LANDING PAGE: FEATURES
+   Pill label, headline and a row of three cards.
+   ========================================================= */
 .features-section {
   padding: 4rem 0;
   border-top: 1px solid var(--border);
   text-align: center;
 }
 
+/* Small rounded label above a section headline */
 .features-label {
   display: inline-block;
   font-family: var(--font-inter);
@@ -289,7 +320,11 @@ body {
   }
 }
 
-/*CTA*/
+
+/* =========================================================
+   LANDING PAGE: STORY AND CTA
+   Personal story on the left, sign-up card on the right.
+   ========================================================= */
 .story-cta-section {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -346,7 +381,11 @@ body {
   }
 }
 
-/*FAQ SECTION*/
+
+/* =========================================================
+   LANDING PAGE: FAQ
+   Accordion. Each question is a button that expands its answer.
+   ========================================================= */
 .faq-section {
   padding: 4rem 0;
   border-top: 1px solid var(--border);
@@ -403,6 +442,7 @@ body {
   color: var(--text-muted);
 }
 
+/* The + / - on the right of each question */
 .faq-icon {
   font-size: 1.4rem;
   color: var(--text-muted);
@@ -417,12 +457,17 @@ body {
   padding: 0 1.5rem 1.25rem;
 }
 
-/*FOOTER*/
+
+/* =========================================================
+   FOOTER
+   Pinned to the bottom of .page-container. Stacks centered
+   on small screens, with extra bottom padding on the page.
+   ========================================================= */
 .site-footer {
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0;            
+  right: 0;
   background-color: var(--surface);
   border-top: 1px solid var(--border);
   padding: 1.75rem 2rem;
@@ -468,13 +513,21 @@ body {
 }
 
 @media (max-width: 700px) {
-  .page-container {padding-bottom: 14rem;}
+  .page-container {
+    padding-bottom: 14rem;
+  }
+
   .footer-content {
     flex-direction: column;
     text-align: center;
   }
 }
 
+
+/* =========================================================
+   SHARED PAGE STYLES
+   Page titles and form messages used on several pages.
+   ========================================================= */
 .page-heading {
   font-size: 1.875rem;
   font-weight: 700;
@@ -484,6 +537,44 @@ body {
   color: var(--text-muted);
   margin-top: 0.5rem;
   margin-bottom: 2rem;
+}
+
+/* Red error message under a form or drop zone */
+.error-text {
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  color: var(--danger);
+  margin-bottom: 1rem;
+}
+
+/* Green confirmation message after a successful action */
+.success-text {
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  color: var(--success);
+  margin-bottom: 1rem;
+}
+
+
+/* =========================================================
+   TAILOR PAGE (job analysis)
+   Company and title inputs, job description box, Analyze
+   button and the results table.
+   ========================================================= */
+.text-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  margin-bottom: 0.75rem;
+}
+
+.text-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .job-textarea {
@@ -518,6 +609,7 @@ body {
   background-color: var(--accent-hover);
 }
 
+/* Tables inside Claude's answer (rendered from markdown) */
 .results-text table {
   width: 100%;
   border-collapse: collapse;
@@ -537,7 +629,12 @@ body {
   font-weight: 700;
 }
 
-.text-input {
+
+/* =========================================================
+   HISTORY PAGE
+   Search box, results count and the list of saved analyses.
+   ========================================================= */
+.search-area {
   width: 100%;
   border: 1px solid var(--border);
   background-color: var(--surface);
@@ -545,21 +642,33 @@ body {
   padding: 0.65rem 1rem;
   font-size: 0.875rem;
   font-family: var(--font-inter);
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-.text-input:focus {
+.search-area:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--accent);
 }
 
-/* HISTORY PAGE */
+.results-count {
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
 .history-item {
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1rem;
   margin-bottom: 1rem;
   background-color: var(--surface);
+}
+
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .history-title {
@@ -579,12 +688,7 @@ body {
   margin: 0;
 }
 
-.history-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* Red outlined Delete button (history items, resume card) */
 .delete-button {
   font-family: var(--font-inter);
   font-size: 0.75rem;
@@ -601,7 +705,11 @@ body {
   border-color: var(--danger);
 }
 
-/* POP UP BUTTON*/
+
+/* =========================================================
+   MODAL (history pop-up)
+   Dark overlay with a scrollable white box on top.
+   ========================================================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -650,47 +758,115 @@ body {
   white-space: pre-wrap;
 }
 
-/* SEARCH FUNCTION*/
-.search-area {
-  width: 100%;
-  border: 1px solid var(--border);
-  background-color: var(--surface);
-  border-radius: 4px;
-  padding: 0.65rem 1rem;
-  font-size: 0.875rem;
-  font-family: var(--font-inter);
-  margin-bottom: 1.5rem;
-}
 
-.search-area:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--accent);
-}
-
-.results-count {
-  font-size: 0.875rem;
-  font-family: var(--font-inter);
-  color: var(--text);
-  margin-bottom: 1rem;
-}
-
-.error-text {
-  font-size: 0.875rem;
-  font-family: var(--font-inter);
-  color: var(--danger);
-  margin-bottom: 1rem;
-}
-
-.home-page {
-  display: inline-block;
-  font-family: var(--font-inter);
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  margin: 1.5rem auto 0;
-  padding: 0 1.5rem;
+/* =========================================================
+   RESUME PAGE
+   Centered column with a status card, section chips, the
+   upload drop zone and a footer row with the Analyze link.
+   ========================================================= */
+.resume-wrap {
   max-width: 640px;
-  width: 100%;
+  margin: 1rem auto;
+}
+
+/* "Resume on file" card */
+.resume-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.resume-status-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.resume-status-meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* "Sections we found" card and its chips */
+.resume-preview {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.resume-preview-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.resume-preview-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.resume-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resume-section-chip {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--pill-text);
+  background-color: var(--pill-bg);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+}
+
+/* Drag-and-drop upload area */
+.drop-zone {
+  border: 1.5px dashed var(--border);
+  border-radius: 12px;
+  background-color: var(--surface);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+/* Darker border while hovering or while a file is dragged over */
+.drop-zone:hover,
+.drop-zone.dragging {
+  border-color: var(--accent);
+}
+
+/* Outline for keyboard users tabbing to the drop zone */
+.drop-zone:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.drop-zone-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.drop-zone-hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Upload button, shown after a file is chosen */
+.resume-actions {
+  margin-bottom: 1rem;
 }
 
 .upload-btn {
@@ -715,111 +891,16 @@ body {
   cursor: not-allowed;
 }
 
-/*RESUME PAGE*/
-.resume-wrap {
-  max-width: 640px;
-  margin: 1rem auto;
-}
-.resume-status {
+/* "Ready to match." note with the Analyze a job link */
+.resume-footer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  margin-bottom: 1rem;
-}
-.resume-status-title { 
-  margin: 0; 
-  font-size: 0.9rem; 
-  font-weight: 600; 
-}
-.resume-status-meta { 
-  margin: 0.2rem 0 0; 
-  font-size: 0.8rem; 
-  color: var(--text-muted); 
+  gap: 1rem;
 }
 
-.drop-zone {
-  border: 1.5px dashed var(--border);
-  border-radius: 12px;
-  background-color: var(--surface);
-  padding: 2.5rem 1rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-.drop-zone:hover, .drop-zone.dragging { 
-  border-color: var(--accent); 
-}
-.drop-zone-title { 
-  margin: 0; 
-  font-size: 0.95rem; 
-  font-weight: 500; 
-}
-.drop-zone-hint { 
-  margin: 0.35rem 0 0; 
-  font-size: 0.8rem; 
-  color: var(--text-muted); 
-}
-
-.drop-zone:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.resume-preview {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  margin-bottom: 1.25rem;
-}
-.resume-preview-label { 
-  margin: 0 0 0.4rem; 
-  font-size: 0.75rem; 
-  color: var(--text-muted); 
-}
-
-.resume-footer-row { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  gap: 1rem; 
-}
-.resume-footer-note { 
-  margin: 0; 
-  font-size: 0.85rem; 
-  color: var(--text-muted); 
-} 
-.resume-actions {
-  margin-bottom: 1rem;
-}
-.success-text {
-  font-size: 0.875rem;
-  font-family: var(--font-inter);
-  color: var(--success);
-  margin-bottom: 1rem;
-}
-
-.resume-sections {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.resume-section-chip {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--pill-text);
-  background-color: var(--pill-bg);
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-}
-
-.resume-preview-text {
+.resume-footer-note {
   margin: 0;
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
