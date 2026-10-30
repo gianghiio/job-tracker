@@ -4,7 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-type ResumeStatus = { uploadedAt: string; preview: string } | null;
+type ResumeStatus = { uploadedAt: string; sections: string[] } | null
 
 export default function Resume() {
     // holds the selected file or undefined if nothing's chosen
@@ -30,7 +30,6 @@ export default function Resume() {
                 return;
             }
             const data = await response.json();
-            console.log("status", data.resume); 
             setStatus(data.resume);
         } catch (error) {
             console.error("Failed to load resume status", error);
@@ -68,7 +67,7 @@ export default function Resume() {
             // saved resume if successful, so show the message and reset the drop zone
             setSuccess("Resume uploaded - It will be used for your next analysis");
             setFile(undefined);
-            await loadStatus;
+            await loadStatus();
         } catch (err) {
             setError("Upload failed - Please try again");
         } finally {
@@ -110,6 +109,21 @@ export default function Resume() {
                                 Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
                             </p>
                         </div>
+                    </div>
+
+                    <div className="resume-preview">
+                        <p className="resume-preview-label">Sections we found</p>
+                        {status.sections.length > 0 ? (
+                            <div className="resume-sections">
+                                {status.sections.map((name) => (
+                                    <span key={name} className="resume-section-chip">{name}</span>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="resume-preview-text">
+                                We couldn't spot any section headings. Try a PDF exported from Word or Google Docs
+                            </p>
+                        )}
                     </div>
                 </>
             )}

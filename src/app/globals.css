@@ -802,3 +802,24 @@ body {
   color: var(--success);
   margin-bottom: 1rem;
 }
+
+.resume-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resume-section-chip {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--pill-text);
+  background-color: var(--pill-bg);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+}
+
+.resume-preview-text {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
