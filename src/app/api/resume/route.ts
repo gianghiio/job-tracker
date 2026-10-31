@@ -131,3 +131,27 @@ export async function GET() {
         )
     }
 }
+
+// Delete the logged-in user's resume
+export async function DELETE() {
+    try {
+        const { userId } = await auth();
+        if (!userId) {
+            return NextResponse.json(
+                { error: "Unauthorized" },
+                { status: 401 }
+            );
+        }
+
+        // deleteMany with userId, so one user can only ever delete their own row
+        await prisma.resume.deleteMany({ where: { userId } });
+
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting resume", error);
+        return NextResponse.json(
+            { error: "Failed to delete resume" },
+            { status: 500 }
+        );
+    }
+}
