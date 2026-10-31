@@ -75,6 +75,27 @@ export default function Resume() {
         }
     }
 
+    // delete the resume on file, after the user confirms
+    const handleDelete = async () => {
+        if (!confirm("Delete your resume? Matching won't work until you upload another.")) {
+            return;
+        }
+        setError("");
+        setSuccess("");
+
+        try {
+            const response = await fetch("/api/resume", { method: "DELETE" });
+            if (!response.ok) {
+                setError("Couldn't delete your resume - Please try again");
+                return;
+            }
+            // nothing on file now, so the cards and the Analyze row d  isappear
+            setStatus(null);
+        } catch {
+            setError("Couldn't delete your resume - Please try again");
+        }
+    };
+
 
     const pickFile = (f: File | undefined) => {
         if (!f || uploading) {
@@ -109,6 +130,7 @@ export default function Resume() {
                                 Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
                             </p>
                         </div>
+                        <button className="delete-button" onClick={handleDelete}>Delete</button>
                     </div>
 
                     <div className="resume-preview">
