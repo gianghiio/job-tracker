@@ -793,6 +793,12 @@ body {
   color: var(--text-muted);
 }
 
+/* shown while the resume status is loading */
+.resume-loading {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
 /* "Sections we found" card and its chips */
 .resume-preview {
   background-color: var(--surface);
