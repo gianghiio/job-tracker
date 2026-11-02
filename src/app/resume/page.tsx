@@ -194,7 +194,9 @@ export default function Resume() {
                             onDragLeave={() => setDragging(false)}
                             onDrop={(e) => {e.preventDefault();setDragging(false); pickFile(e.dataTransfer.files[0]);}}
                         >
-                            <p className="drop-zone-title">{file ? file.name : "Drag a PDF here, or choose a file"}</p>
+                            <p className="drop-zone-title">
+                                {file ? file.name : status ? "Replace your resume - drag a PDF or choose a file" : "Drag a PDF here, or choose a file"}
+                            </p>
                             <p className="drop-zone-hint">PDF only - under 4 MB</p>
                         </div>
 
