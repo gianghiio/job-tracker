@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Show, useAuth } from "@clerk/nextjs";
 
 type ResumeStatus = { uploadedAt: string; sections: string[] } | null
 
@@ -22,6 +23,7 @@ export default function Resume() {
     const [status, setStatus] = useState<ResumeStatus>(null);
     // true until the first status request finishes (stops the cards popping in)
     const [statusLoading, setStatusLoading] = useState(true);
+    const { isSignedIn } = useAuth();
 
     const loadStatus = async () => {
         try {
@@ -41,10 +43,12 @@ export default function Resume() {
         }
     };
 
-    // run once when the page first loads
+    // load the status once the user is signed in (also runs right after a popup sign-in)
     useEffect(() => {
-        loadStatus();
-    }, []);
+        if (isSignedIn) {
+            loadStatus();
+        }
+    }, [isSignedIn]);
 
     const handleUpload = async() =>  {
         if (!file) {
@@ -120,91 +124,101 @@ export default function Resume() {
         setSuccess("");
         setFile(f);
     }
-    return (
+     return (
     <div className="page-container">
         <Header></Header>
-        <div className="resume-wrap">
-            <h1 className="page-heading">Your resume</h1>
-            <p className="page-subtitle">Upload once. It's matched against every job you analyze.</p>
+        {/* signed-out visitors only see a login prompt */}
+        <Show when="signed-out">
+            <div className="resume-wrap">
+                <h1 className="page-heading">Your resume</h1>
+                <p className="page-subtitle">Log in to upload your resume</p>
+            </div>
+        </Show>
 
-            {statusLoading ? (
-                <p className="resume-loading">Loading your resume...</p>
-            ) : (
-                <>
-                    {status && (
-                        <>
-                            <div className="resume-status">
-                                <div>
-                                    <p className="resume-status-title">Resume on file</p>
-                                    <p className="resume-status-meta">
-                                        Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
-                                    </p>
-                                </div>
-                                <button className="delete-button" onClick={handleDelete}>Delete</button>
-                            </div>
+        <Show when="signed-in">
+            <div className="resume-wrap">
+                <h1 className="page-heading">Your resume</h1>
+                <p className="page-subtitle">Upload once. It's matched against every job you analyze.</p>
 
-                            <div className="resume-preview">
-                                <p className="resume-preview-label">Sections we found</p>
-                                {status.sections.length > 0 ? (
-                                    <div className="resume-sections">
-                                        {status.sections.map((name) => (
-                                            <span key={name} className="resume-section-chip">{name}</span>
-                                        ))}
+                {statusLoading ? (
+                    <p className="resume-loading">Loading your resume...</p>
+                ) : (
+                    <>
+                        {status && (
+                            <>
+                                <div className="resume-status">
+                                    <div>
+                                        <p className="resume-status-title">Resume on file</p>
+                                        <p className="resume-status-meta">
+                                            Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
+                                        </p>
                                     </div>
-                                ) : (
-                                    <p className="resume-preview-text">
-                                        We couldn't spot any section headings. Try a PDF exported from Word or Google Docs
-                                    </p>
-                                )}
+                                    <button className="delete-button" onClick={handleDelete}>Delete</button>
+                                </div>
+
+                                <div className="resume-preview">
+                                    <p className="resume-preview-label">Sections we found</p>
+                                    {status.sections.length > 0 ? (
+                                        <div className="resume-sections">
+                                            {status.sections.map((name) => (
+                                                <span key={name} className="resume-section-chip">{name}</span>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className="resume-preview-text">
+                                            We couldn't spot any section headings. Try a PDF exported from Word or Google Docs
+                                        </p>
+                                    )}
+                                </div>
+                            </>
+                        )}
+
+                        <input type="file" accept=".pdf" ref={resumeInput} style={{ display: "none" }} onChange={(e) => {
+                                pickFile(e.target.files?.[0]);
+                                e.target.value = "";
+                            }}
+                        />
+
+                        <div
+                            className={`drop-zone ${dragging ? "dragging" : ""}`}
+                            role="button"
+                            tabIndex={0}
+                            onClick={() => resumeInput.current?.click()}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    resumeInput.current?.click();
+                                }
+                            }}
+                            onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+                            onDragLeave={() => setDragging(false)}
+                            onDrop={(e) => {e.preventDefault();setDragging(false); pickFile(e.dataTransfer.files[0]);}}
+                        >
+                            <p className="drop-zone-title">{file ? file.name : "Drag a PDF here, or choose a file"}</p>
+                            <p className="drop-zone-hint">PDF only - under 4 MB</p>
+                        </div>
+
+                        {/*error message and the Upload button (only after a file is chosen) */}
+                        {error && <p className="error-text">{error}</p>}
+                        {success && <p className="success-text">{success}</p>}
+                        {file && (
+                            <div className="resume-actions">
+                                {/*disabled while uploading, and the label changes */}
+                                <button className="upload-btn" onClick={handleUpload} disabled={uploading}>
+                                    {uploading ? "Uploading..." : "Upload resume"}
+                                </button>
                             </div>
-                        </>
-                    )}
-
-                    <input type="file" accept=".pdf" ref={resumeInput} style={{ display: "none" }} onChange={(e) => {
-                            pickFile(e.target.files?.[0]);
-                            e.target.value = "";
-                        }}
-                    />
-
-                    <div
-                        className={`drop-zone ${dragging ? "dragging" : ""}`}
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => resumeInput.current?.click()}
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                resumeInput.current?.click();
-                            }
-                        }}
-                        onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
-                        onDragLeave={() => setDragging(false)}
-                        onDrop={(e) => {e.preventDefault();setDragging(false); pickFile(e.dataTransfer.files[0]);}}
-                    >
-                        <p className="drop-zone-title">{file ? file.name : "Drag a PDF here, or choose a file"}</p>
-                        <p className="drop-zone-hint">PDF only - under 4 MB</p>
-                    </div>
-
-                    {/*error message and the Upload button (only after a file is chosen) */}
-                    {error && <p className="error-text">{error}</p>}
-                    {success && <p className="success-text">{success}</p>}
-                    {file && (
-                        <div className="resume-actions">
-                            {/*disabled while uploading, and the label changes */}
-                            <button className="upload-btn" onClick={handleUpload} disabled={uploading}>
-                                {uploading ? "Uploading..." : "Upload resume"}
-                            </button>
-                        </div>
-                    )}
-                    {status && (
-                        <div className="resume-footer-row">
-                            <p className="resume-footer-note">Ready to match.</p>
-                            <Link href="/tailor" className="cta-button">Analyze a job</Link>
-                        </div>
-                    )}
-                </>
-            )}
-        </div>
+                        )}
+                        {status && (
+                            <div className="resume-footer-row">
+                                <p className="resume-footer-note">Ready to match.</p>
+                                <Link href="/tailor" className="cta-button">Analyze a job</Link>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+        </Show>
         <Footer></Footer>
     </div>
     )
