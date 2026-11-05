@@ -213,7 +213,7 @@ export default function Resume() {
                         )}
                         {status && (
                             <div className="resume-footer-row">
-                                <p className="resume-footer-note">Ready to match.</p>
+                                <p className="resume-footer-note">Next: analyze a job</p>
                                 <Link href="/tailor" className="cta-button">Analyze a job</Link>
                             </div>
                         )}
