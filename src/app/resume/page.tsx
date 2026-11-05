@@ -86,7 +86,7 @@ export default function Resume() {
 
     // delete the resume on file, after the user confirms
     const handleDelete = async () => {
-        if (!confirm("Delete your resume? Matching won't work until you upload another.")) {
+        if (!confirm("Delete your resume? Matching won't work until you upload another")) {
             return;
         }
         setError("");
@@ -153,7 +153,7 @@ export default function Resume() {
                                             Uploaded {new Date(status.uploadedAt).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" })}
                                         </p>
                                     </div>
-                                    <button className="delete-button" onClick={handleDelete}>Delete</button>
+                                    <button className="delete-button" onClick={handleDelete} aria-label="Delete resume">Delete</button>
                                 </div>
 
                                 <div className="resume-preview">
@@ -201,8 +201,8 @@ export default function Resume() {
                         </div>
 
                         {/*error message and the Upload button (only after a file is chosen) */}
-                        {error && <p className="error-text">{error}</p>}
-                        {success && <p className="success-text">{success}</p>}
+                        {error && <p className="error-text" role="alert">{error}</p>}
+                        {success && <p className="success-text" role="status">{success}</p>}
                         {file && (
                             <div className="resume-actions">
                                 {/*disabled while uploading, and the label changes */}
