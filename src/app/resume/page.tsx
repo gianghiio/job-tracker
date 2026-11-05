@@ -47,6 +47,10 @@ export default function Resume() {
     useEffect(() => {
         if (isSignedIn) {
             loadStatus();
+        } else {
+           // forget the previous user's data
+           setStatus(null);
+           setStatusLoading(true);
         }
     }, [isSignedIn]);
 
