@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 
+const statusList =["Saved", "Applied", "Interviewing", "Offer", "Rejected"];
+
 export async function GET() {
     try {
         const { userId } = await auth();
@@ -45,6 +47,34 @@ export async function DELETE(req: NextRequest) {
         console.error("Error deleting application", error);
         return NextResponse.json(
             {error: "Failed to delete application"},
+            {status: 500}
+        )
+    }
+}
+
+export async function PATCH(req: NextRequest) {
+    try {
+        const {userId} = await auth();
+        if (!userId) {
+            return NextResponse.json({error: "Unauthorized"}, {status: 401});
+        }
+        const {id, status} = await req.json();
+        if (!statusList.includes(status)) {
+            return NextResponse.json({error: "Invalid status"}, {status: 400})
+        }
+        const result = await prisma.jobApplication.updateMany({
+            where: { id, userId},
+            data: {status}
+        });
+
+        if (result.count ===0) {
+            return NextResponse.json({error: "Not found"}, {status: 404});
+        }
+        return NextResponse.json({success: true});
+    } catch (error) {
+        console.error("Error changing application status", error);
+        return NextResponse.json(
+            {error: "Failed to change application status"},
             {status: 500}
         )
     }
