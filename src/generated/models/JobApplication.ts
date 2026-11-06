@@ -42,6 +42,7 @@ export type JobApplicationMinAggregateOutputType = {
   result: string | null
   createdAt: Date | null
   userId: string | null
+  status: string | null
 }
 
 export type JobApplicationMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type JobApplicationMaxAggregateOutputType = {
   result: string | null
   createdAt: Date | null
   userId: string | null
+  status: string | null
 }
 
 export type JobApplicationCountAggregateOutputType = {
@@ -62,6 +64,7 @@ export type JobApplicationCountAggregateOutputType = {
   result: number
   createdAt: number
   userId: number
+  status: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type JobApplicationMinAggregateInputType = {
   result?: true
   createdAt?: true
   userId?: true
+  status?: true
 }
 
 export type JobApplicationMaxAggregateInputType = {
@@ -92,6 +96,7 @@ export type JobApplicationMaxAggregateInputType = {
   result?: true
   createdAt?: true
   userId?: true
+  status?: true
 }
 
 export type JobApplicationCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type JobApplicationCountAggregateInputType = {
   result?: true
   createdAt?: true
   userId?: true
+  status?: true
   _all?: true
 }
 
@@ -199,6 +205,7 @@ export type JobApplicationGroupByOutputType = {
   result: string | null
   createdAt: Date
   userId: string | null
+  status: string
   _count: JobApplicationCountAggregateOutputType | null
   _avg: JobApplicationAvgAggregateOutputType | null
   _sum: JobApplicationSumAggregateOutputType | null
@@ -232,6 +239,7 @@ export type JobApplicationWhereInput = {
   result?: Prisma.StringNullableFilter<"JobApplication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"JobApplication"> | Date | string
   userId?: Prisma.StringNullableFilter<"JobApplication"> | string | null
+  status?: Prisma.StringFilter<"JobApplication"> | string
 }
 
 export type JobApplicationOrderByWithRelationInput = {
@@ -242,6 +250,7 @@ export type JobApplicationOrderByWithRelationInput = {
   result?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type JobApplicationWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +264,7 @@ export type JobApplicationWhereUniqueInput = Prisma.AtLeast<{
   result?: Prisma.StringNullableFilter<"JobApplication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"JobApplication"> | Date | string
   userId?: Prisma.StringNullableFilter<"JobApplication"> | string | null
+  status?: Prisma.StringFilter<"JobApplication"> | string
 }, "id">
 
 export type JobApplicationOrderByWithAggregationInput = {
@@ -265,6 +275,7 @@ export type JobApplicationOrderByWithAggregationInput = {
   result?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.JobApplicationCountOrderByAggregateInput
   _avg?: Prisma.JobApplicationAvgOrderByAggregateInput
   _max?: Prisma.JobApplicationMaxOrderByAggregateInput
@@ -283,6 +294,7 @@ export type JobApplicationScalarWhereWithAggregatesInput = {
   result?: Prisma.StringNullableWithAggregatesFilter<"JobApplication"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"JobApplication"> | Date | string
   userId?: Prisma.StringNullableWithAggregatesFilter<"JobApplication"> | string | null
+  status?: Prisma.StringWithAggregatesFilter<"JobApplication"> | string
 }
 
 export type JobApplicationCreateInput = {
@@ -292,6 +304,7 @@ export type JobApplicationCreateInput = {
   result?: string | null
   createdAt?: Date | string
   userId?: string | null
+  status?: string
 }
 
 export type JobApplicationUncheckedCreateInput = {
@@ -302,6 +315,7 @@ export type JobApplicationUncheckedCreateInput = {
   result?: string | null
   createdAt?: Date | string
   userId?: string | null
+  status?: string
 }
 
 export type JobApplicationUpdateInput = {
@@ -311,6 +325,7 @@ export type JobApplicationUpdateInput = {
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type JobApplicationUncheckedUpdateInput = {
@@ -321,6 +336,7 @@ export type JobApplicationUncheckedUpdateInput = {
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type JobApplicationCreateManyInput = {
@@ -331,6 +347,7 @@ export type JobApplicationCreateManyInput = {
   result?: string | null
   createdAt?: Date | string
   userId?: string | null
+  status?: string
 }
 
 export type JobApplicationUpdateManyMutationInput = {
@@ -340,6 +357,7 @@ export type JobApplicationUpdateManyMutationInput = {
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type JobApplicationUncheckedUpdateManyInput = {
@@ -350,6 +368,7 @@ export type JobApplicationUncheckedUpdateManyInput = {
   result?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type JobApplicationCountOrderByAggregateInput = {
@@ -360,6 +379,7 @@ export type JobApplicationCountOrderByAggregateInput = {
   result?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type JobApplicationAvgOrderByAggregateInput = {
@@ -374,6 +394,7 @@ export type JobApplicationMaxOrderByAggregateInput = {
   result?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type JobApplicationMinOrderByAggregateInput = {
@@ -384,6 +405,7 @@ export type JobApplicationMinOrderByAggregateInput = {
   result?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type JobApplicationSumOrderByAggregateInput = {
@@ -420,6 +442,7 @@ export type JobApplicationSelect<ExtArgs extends runtime.Types.Extensions.Intern
   result?: boolean
   createdAt?: boolean
   userId?: boolean
+  status?: boolean
 }, ExtArgs["result"]["jobApplication"]>
 
 export type JobApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -430,6 +453,7 @@ export type JobApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   result?: boolean
   createdAt?: boolean
   userId?: boolean
+  status?: boolean
 }, ExtArgs["result"]["jobApplication"]>
 
 export type JobApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -440,6 +464,7 @@ export type JobApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   result?: boolean
   createdAt?: boolean
   userId?: boolean
+  status?: boolean
 }, ExtArgs["result"]["jobApplication"]>
 
 export type JobApplicationSelectScalar = {
@@ -450,9 +475,10 @@ export type JobApplicationSelectScalar = {
   result?: boolean
   createdAt?: boolean
   userId?: boolean
+  status?: boolean
 }
 
-export type JobApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "jobTitle" | "jobDescription" | "result" | "createdAt" | "userId", ExtArgs["result"]["jobApplication"]>
+export type JobApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyName" | "jobTitle" | "jobDescription" | "result" | "createdAt" | "userId" | "status", ExtArgs["result"]["jobApplication"]>
 
 export type $JobApplicationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "JobApplication"
@@ -465,6 +491,7 @@ export type $JobApplicationPayload<ExtArgs extends runtime.Types.Extensions.Inte
     result: string | null
     createdAt: Date
     userId: string | null
+    status: string
   }, ExtArgs["result"]["jobApplication"]>
   composites: {}
 }
@@ -895,6 +922,7 @@ export interface JobApplicationFieldRefs {
   readonly result: Prisma.FieldRef<"JobApplication", 'String'>
   readonly createdAt: Prisma.FieldRef<"JobApplication", 'DateTime'>
   readonly userId: Prisma.FieldRef<"JobApplication", 'String'>
+  readonly status: Prisma.FieldRef<"JobApplication", 'String'>
 }
     
 

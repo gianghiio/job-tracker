@@ -78,7 +78,8 @@ export const JobApplicationScalarFieldEnum = {
   jobDescription: 'jobDescription',
   result: 'result',
   createdAt: 'createdAt',
-  userId: 'userId'
+  userId: 'userId',
+  status: 'status'
 } as const
 
 export type JobApplicationScalarFieldEnum = (typeof JobApplicationScalarFieldEnum)[keyof typeof JobApplicationScalarFieldEnum]

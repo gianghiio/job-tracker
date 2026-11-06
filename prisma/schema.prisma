@@ -20,6 +20,7 @@ model JobApplication {
   result String?
   createdAt   DateTime @default(now())
   userId      String?
+  status       String   @default("Saved")
 }
 
 model Resume {
