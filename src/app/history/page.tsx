@@ -12,7 +12,8 @@ type Application = {
     createdAt: string;
     jobTitle: string;
     jobDescription: string;
-    result: string | null; 
+    result: string | null;
+    status: string;
 }
 
 export default function History() {
@@ -22,8 +23,8 @@ export default function History() {
     const [searchTerm, setSearchTerm] = useState("");
     // run once right when the page loads
     useEffect(() => {
-        const fetchApplications = async() => {
-            try{
+        const fetchApplications = async () => {
+            try {
                 const response = await fetch("/api/applications");
                 if (!response.ok) {
                     setApplications([]);
@@ -32,14 +33,14 @@ export default function History() {
 
                 const data = await response.json();
                 setApplications(data.applications ?? []);
-            } catch(error) {
+            } catch (error) {
                 console.error("Failed to load history", error);
             } finally {
                 setLoading(false);
             }
         }
         fetchApplications();
-    },[]);
+    }, []);
 
     // Delete specific application
     const handleDelete = async (id: number, e: React.MouseEvent) => {
@@ -50,10 +51,10 @@ export default function History() {
             return;
         }
         try {
-            await fetch("/api/applications",{
+            await fetch("/api/applications", {
                 method: "DELETE",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({id}),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id }),
             });
 
             //remove it from local state so the UI updates immediately
@@ -71,10 +72,10 @@ export default function History() {
                 app.companyName.toLowerCase().includes(term) ||
                 app.jobTitle.toLowerCase().includes(term)
             )
-        } catch (error){
+        } catch (error) {
             console.error("Error searching for application", error)
         }
-    }) 
+    })
 
     return (
         <div className="page-container">
@@ -104,6 +105,7 @@ export default function History() {
                     <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                         <div className="history-item-header">
                             <h2 className="history-title">{app.jobTitle}</h2>
+                            <span className="status-badge">{app.status}</span>
                             <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
                         </div>
                         <p className="history-company">{app.companyName}</p>
