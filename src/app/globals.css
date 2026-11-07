@@ -688,6 +688,43 @@ body {
   margin: 0;
 }
 
+/* status label on each history item */
+.status-badge {
+  margin-left: auto;      /* pushes the badge and Delete button to the right */
+  margin-right: 0.75rem;
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-saved {
+  background-color: var(--pill-bg);
+  color: var(--pill-text);
+}
+
+.status-applied {
+  background-color: #DCE6F2;
+  color: #2F4A6B;
+}
+
+.status-interviewing {
+  background-color: #F6E7C8;
+  color: #7A5410;
+}
+
+.status-offer {
+  background-color: #DDEFE2;
+  color: var(--success);
+}
+
+.status-rejected {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
 /* Red outlined Delete button (history items, resume card) */
 .delete-button {
   font-family: var(--font-inter);

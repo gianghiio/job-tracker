@@ -105,7 +105,7 @@ export default function History() {
                     <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                         <div className="history-item-header">
                             <h2 className="history-title">{app.jobTitle}</h2>
-                            <span className="status-badge">{app.status}</span>
+                            <span className={`status-badge status-${app.status.toLowerCase()}`}>{app.status}</span>
                             <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
                         </div>
                         <p className="history-company">{app.companyName}</p>
