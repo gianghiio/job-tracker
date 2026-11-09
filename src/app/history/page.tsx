@@ -16,6 +16,8 @@ type Application = {
     status: string;
 }
 
+const statusList = ["Saved", "Applied", "Interviewing", "Offer", "Rejected"];
+
 export default function History() {
     const [applications, setApplications] = useState<Application[]>([]);
     const [loading, setLoading] = useState(true);
@@ -77,6 +79,30 @@ export default function History() {
         }
     })
 
+    // change an application's status
+    const handleStatusChange = async (id: number, newStatus: string) => {
+        try {
+            const response = await fetch("/api/applications", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id, status: newStatus }),
+            });
+
+            // the server refused: leave the screen as it was, so the dropdown goes back
+            if (!response.ok) {
+                console.error("Failed to change status");
+                return;
+            }
+
+            // same list, with only the matching entry changed
+            setApplications((prev) =>
+                prev.map((app) => (app.id === id ? { ...app, status: newStatus } : app))
+            );
+        } catch (error) {
+            console.error("Error changing status application", error);
+        }
+    };
+
     return (
         <div className="page-container">
             <Header></Header>
@@ -105,7 +131,17 @@ export default function History() {
                     <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                         <div className="history-item-header">
                             <h2 className="history-title">{app.jobTitle}</h2>
-                            <span className={`status-badge status-${app.status.toLowerCase()}`}>{app.status}</span>
+                            <select 
+                                className={`status-badge status-${app.status.toLowerCase()}`}
+                                value={app.status}
+                                aria-label={`Change status for ${app.jobTitle}`}
+                                onClick ={(e)=> e.stopPropagation()}
+                                onChange={(e) => handleStatusChange(app.id, e.target.value)}
+                            >
+                                {statusList.map((status) => (
+                                    <option key={status} value={status}>{status}</option>
+                                ))}
+                            </select>
                             <button className="delete-button" onClick={(e) => handleDelete(app.id, e)}>Delete</button>
                         </div>
                         <p className="history-company">{app.companyName}</p>
