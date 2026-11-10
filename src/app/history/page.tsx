@@ -71,9 +71,10 @@ export default function History() {
     const filteredApplication = applications.filter((app) => {
         try {
             const term = searchTerm.toLowerCase();
+            const matchesTerm = app.companyName.toLowerCase().includes(term) || app.jobTitle.toLowerCase().includes(term); 
+            const matchesStatus = statusFilter === "All" || app.status === statusFilter;
             return (
-                app.companyName.toLowerCase().includes(term) ||
-                app.jobTitle.toLowerCase().includes(term)
+                matchesTerm && matchesStatus
             )
         } catch (error) {
             console.error("Error searching for application", error)
