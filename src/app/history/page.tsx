@@ -23,6 +23,7 @@ export default function History() {
     const [loading, setLoading] = useState(true);
     const [selectedApp, setSelectedApp] = useState<Application | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [statusFilter, setStatusFilter] = useState("All");
     // run once right when the page loads
     useEffect(() => {
         const fetchApplications = async () => {
@@ -88,7 +89,7 @@ export default function History() {
                 body: JSON.stringify({ id, status: newStatus }),
             });
 
-            // the server refused: leave the screen as it was, so the dropdown goes back
+            // the server refused: the dropdown goes back
             if (!response.ok) {
                 console.error("Failed to change status");
                 return;
@@ -111,11 +112,21 @@ export default function History() {
             </Show>
 
             <Show when="signed-in">
-                <h1 className="page-loading">History</h1>
+                <h1 className="page-heading">History</h1>
                 <p className="page-subtitle">Your analyzed job applications</p>
 
                 <div className="search-function">
                     <input className="search-area" placeholder="Search for Company Name or Job Title" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+                </div>
+                <div className="status-filters">
+                    {["All", ...statusList].map((status)=> (
+                        <button 
+                            key={status}
+                            className={`filter-btn ${statusFilter === status ? "active": ""}`}
+                            onClick ={() => setStatusFilter(status)}
+                        > {status}
+                        </button>
+                    ))}
                 </div>
                 {loading && <p>Loading...</p>}
                 {!loading && applications.length === 0 && (
