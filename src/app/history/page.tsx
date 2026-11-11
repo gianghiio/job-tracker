@@ -141,8 +141,8 @@ export default function History() {
                 {!loading && applications.length > 0 && filteredApplication.length === 0 && (
                     <p className="empty-text">
                         {statusFilter === "All"
-                            ? "No applications match your search"
-                            : `No applications with the status "${statusFilter}" match your search`}
+                            ? "No applications match your search."
+                            : `No "${statusFilter}" applications found.`}
                     </p>
                 )}
                 {filteredApplication.map((app) => (
