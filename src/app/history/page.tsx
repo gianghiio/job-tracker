@@ -138,7 +138,13 @@ export default function History() {
                         Showing {filteredApplication.length} of {applications.length}
                     </p>
                 )}
-
+                {!loading && applications.length > 0 && filteredApplication.length === 0 && (
+                    <p className="empty-text">
+                        {statusFilter === "All"
+                            ? "No applications match your search"
+                            : `No applications with the status "${statusFilter}" match your search`}
+                    </p>
+                )}
                 {filteredApplication.map((app) => (
                     <div key={app.id} className="history-item" onClick={() => setSelectedApp(app)}>
                         <div className="history-item-header">
