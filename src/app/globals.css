@@ -11,14 +11,14 @@
   --text: #14181B;
   --text-muted: #5B6168;
   --text-subtle: #6F757B;
-  --accent: #14181B;        /* buttons */
-  --accent-hover: #3A3F45;
+  --accent: #0F766E;        /* buttons */
+  --accent-hover: #0B5C56;
   --on-accent: #FFFFFF;     /* text on top of --accent */
   --danger: #A32D2D;
   --danger-bg: #FCEBEB;
   --success: #2D6A3F;
-  --pill-bg: #BFC9D1;       /* small rounded labels and chips */
-  --pill-text: #5B6168;
+  --pill-bg: #D5EFEC;       /* small rounded labels and chips */
+  --pill-text: #0B5C56;
 }
 
 
