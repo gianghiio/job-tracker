@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <div className="site-footer">
             <div className="footer-content">
-                <p className="footer-brand">Resume Tailor</p>
+                <Link href="/" className="footer-brand"><h1>Resume Tailor</h1></Link>
                 <p className="footer-copyright">© 2026 Resume Tailor</p>
                 <div className="footer-links">
                     <Link href="/resume">Your Resume</Link>
